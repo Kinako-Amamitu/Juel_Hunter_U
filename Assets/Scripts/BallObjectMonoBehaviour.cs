@@ -10,6 +10,11 @@ public class BallObject : MonoBehaviour
     [SerializeField]
     public bool isTouch = false;
 
+    public float MoveSpeed = 20.0f;         // 移動値
+
+    int frameCount = 0;             // フレームカウント
+    const int deleteFrame = 180;    // 削除フレーム
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +24,14 @@ public class BallObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 位置の更新
+        transform.Translate(MoveSpeed * Time.deltaTime, 0, 0);
 
+        // 一定フレームで消す
+        //if (++frameCount > deleteFrame)
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
 
@@ -33,7 +45,6 @@ public class BallObject : MonoBehaviour
         else
         {
             Debug.Log("ボールじゃないところにぶつかった！");
-            Destroy(gameObject);
         }
        
     }

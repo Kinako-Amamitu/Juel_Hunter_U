@@ -21,6 +21,7 @@ public class FireBullet : MonoBehaviour
         {
             // íeÇÃê∂ê¨
             Instantiate(BulletObj, transform.position + bulletPoint, Quaternion.identity);
+
         }
     }
 }
