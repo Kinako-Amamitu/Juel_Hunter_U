@@ -41,6 +41,7 @@ public class BallObject : MonoBehaviour
         if (other.gameObject.tag == "Ball")
         {
             Debug.Log("É{Å[ÉãÇ…Ç‘Ç¬Ç©Ç¡ÇΩÅI");
+            Destroy(gameObject);
         }
         else
         {
