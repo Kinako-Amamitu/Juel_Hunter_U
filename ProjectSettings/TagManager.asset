@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ball
+  - Red
+  - Blue
+  - Yellow
+  - Green
+  - Purple
+  - Rail
   layers:
   - Default
   - TransparentFX
@@ -12,7 +18,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - juel
   - 
   - 
   - 

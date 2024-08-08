@@ -27,23 +27,12 @@ public class Bullet : MonoBehaviour
         //Destroy(gameObject, destroyTime);
     }
 
-    /// <summary>
-    /// 衝突判定
-    /// </summary>
-    /// <param name="other"></param>
-    void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //ボールにぶつかったとき
-        if (other.gameObject.tag == "Ball")
+        if(collision.gameObject.tag=="Rail")
         {
-            Debug.Log("ボールにぶつかった！");
-            Destroy(gameObject);
+            GetComponent<Rigidbody2D>().velocity=new Vector2(0.1f,0);
         }
-        else
-        {
-            Debug.Log("ボールじゃないところにぶつかった！");
-        }
-
     }
 }
 
