@@ -23,7 +23,7 @@ public class SpawnJuel : MonoBehaviour
             // Fƒ‰ƒ“ƒ_ƒ€
             int rnd = Random.Range(0, juelPrefabs.Count);
             // ’e‚Ì¶¬
-            Instantiate(juelPrefabs[rnd], transform.position+Vector3.right*0.5f, Quaternion.identity);
+            Instantiate(juelPrefabs[rnd], transform.position+Vector3.right*0.005f, Quaternion.identity);
         }
     }
 }

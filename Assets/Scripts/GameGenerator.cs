@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class BulletGenerator : MonoBehaviour
+public class GameGenerator : MonoBehaviour
 {
     [SerializeField] List<Bullet> bulletPrefab;     // 弾のプレファブ
     [SerializeField] private Transform firePoint;     // 発射ポイント
     //[SerializeField] private float fireRate = 2.0f;   // 発射間隔(秒)
     [SerializeField] private PlayerController playerController;      // PlayerControllerへの参照
+    [SerializeField] List<GameObject> juelPrefabs; //判定に使う用のジュエルプレハブ
+    [SerializeField] private Transform outZone; //ゲームオーバー判定位置
 
     //フィールド上のアイテム
     List<GameObject> bullets;
@@ -23,6 +25,7 @@ public class BulletGenerator : MonoBehaviour
     [SerializeField] TextMeshProUGUI textGameScore;
     [SerializeField] TextMeshProUGUI textGameTimer;
     [SerializeField] GameObject panelGameResult;
+    [SerializeField] TextMeshProUGUI gameoverText;
 
     //private float timer = 0f;       // タイマー
 
@@ -160,5 +163,11 @@ public class BulletGenerator : MonoBehaviour
 
         // 削除
         DeleteItems(checkItems);
+    }
+
+    // ゲームオーバー判定
+    void Gameover()
+    {
+        juelPrefabs
     }
 }
