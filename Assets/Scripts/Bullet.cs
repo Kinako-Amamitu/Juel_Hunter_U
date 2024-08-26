@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -7,8 +8,13 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed;　// 弾の速度
     [SerializeField] private float destroyTime;　// 弾の生存期間
+    [SerializeField] TextMeshProUGUI gameoverText; //ゲームオーバーのテキスト
 
 
+    private void Start()
+    {
+        gameoverText=GameObject.Find("gameoverText").GetComponent<TextMeshProUGUI>();
+    }
     /// <summary>
     /// バレット発射
     /// </summary>
@@ -32,6 +38,10 @@ public class Bullet : MonoBehaviour
         if(collision.gameObject.tag=="Rail")
         {
             GetComponent<Rigidbody2D>().velocity=new Vector2(0.1f,0);
+        }
+        else if(collision.gameObject.tag=="Out")
+        {
+            gameoverText.SetText("GameOver!!");
         }
     }
 }

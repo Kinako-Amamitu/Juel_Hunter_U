@@ -11,6 +11,7 @@ TagManager:
   - Green
   - Purple
   - Rail
+  - Out
   layers:
   - Default
   - TransparentFX

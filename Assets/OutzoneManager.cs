@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class PlayerCtrl : MonoBehaviour
+public class OutzoneManager : MonoBehaviour
 {
+
+    [SerializeField] TextMeshProUGUI gameOvertext;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,10 +17,5 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void OnTap()
-    {
-
     }
 }

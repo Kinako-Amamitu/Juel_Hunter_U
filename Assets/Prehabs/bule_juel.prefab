@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 100
   destroyTime: 0
+  gameoverText: {fileID: 0}
 --- !u!50 &7588121842021507621
 Rigidbody2D:
   serializedVersion: 4

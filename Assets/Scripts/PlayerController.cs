@@ -3,8 +3,10 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    [SerializeField] GameGenerator gameGenerator;
+
     private Rigidbody2D rb;     // コンポーネントの取得用
-    private Animator anim;      // コンポーネントの取得用
+  
 
     private Vector3 lookDirection = new Vector3(0, -1.0f,0);      // キャラの向きの情報の設定用
 
@@ -13,44 +15,38 @@ public class PlayerController : MonoBehaviour
     {
 
         TryGetComponent(out rb);
-        TryGetComponent(out anim);
+      
     }
 
     private void Update()
     {
-        if (!anim)
+        /* マウスクリックを検知 */
+        if (Input.GetMouseButtonDown(0))
         {
-            return;
+
+            // タップした場所からRayを作成
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // Raycastを作成
+            RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
+
+            //Rayが何かに衝突したことを検知 & 衝突した対象が自分自身かを判別
+            if (hit2d && hit2d.transform.gameObject.tag=="Player")
+            {
+                gameGenerator.FireBullet();
+
+
+            }
+
         }
-
-        // キャラの向いている方向と移動アニメの同期
-        SyncMoveAnimation();
     }
-
-
-    /// <summary>
-    /// キャラの向いている方向と移動アニメの同期
-    /// </summary>
-    private void SyncMoveAnimation()
+            /// <summary>
+            /// プレイヤーの進行方向の取得用
+            /// </summary>
+            /// <returns></returns>
+     public Vector3 GetLookDirection()
     {
-            // 正規化
-            lookDirection.Normalize();
-
-            // キー入力の値とBlendTreeでせっていした移動アニメ用の値を確認し、移動アニメを再生
-            anim.SetFloat("Look X", lookDirection.x);
-            anim.SetFloat("Look Y", lookDirection.y);
-
-            // キー入力の値とBlendTreeで設定した移動アニメ用の値を確認し、移動アニメを再生
-            anim.SetFloat("Speed", lookDirection.sqrMagnitude);
-    }
-
-    /// <summary>
-    /// プレイヤーの進行方向の取得用
-    /// </summary>
-    /// <returns></returns>
-    public Vector3 GetLookDirection()
-    {
-
-        return transform.forward;
+        Vector3 direction = new Vector3(-Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad), Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad));
+        return direction;
     }
 }

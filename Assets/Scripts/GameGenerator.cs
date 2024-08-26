@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Networking;
 
 public class GameGenerator : MonoBehaviour
 {
@@ -21,27 +26,25 @@ public class GameGenerator : MonoBehaviour
     //スコア
     int gameScore;
 
+   
+
     // UI
     [SerializeField] TextMeshProUGUI textGameScore;
     [SerializeField] TextMeshProUGUI textGameTimer;
     [SerializeField] GameObject panelGameResult;
-    [SerializeField] TextMeshProUGUI gameoverText;
 
     //private float timer = 0f;       // タイマー
 
     private void Start()
     {
+      
+        
         // 全アイテム
         bullets = new List<GameObject>();
     }
 
     private void Update()
     {
-
-    
-
-        // 削除されたアイテムをクリア
-        bullets.RemoveAll(item => item == null);
 
         
             // 当たり判定があったオブジェクト
@@ -163,11 +166,5 @@ public class GameGenerator : MonoBehaviour
 
         // 削除
         DeleteItems(checkItems);
-    }
-
-    // ゲームオーバー判定
-    void Gameover()
-    {
-        juelPrefabs
     }
 }
