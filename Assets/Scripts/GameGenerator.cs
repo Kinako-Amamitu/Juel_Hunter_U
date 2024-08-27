@@ -31,7 +31,7 @@ public class GameGenerator : MonoBehaviour
     // UI
     [SerializeField] TextMeshProUGUI textGameScore;
     [SerializeField] TextMeshProUGUI textGameTimer;
-    [SerializeField] GameObject panelGameResult;
+    
 
     //private float timer = 0f;       // タイマー
 
@@ -76,7 +76,7 @@ public class GameGenerator : MonoBehaviour
             Vector3 direction = playerController.GetLookDirection();
 
             // BulletのShootメソッドを呼び出して弾を発射
-            bullet.Shoot(direction);
+            bullet.Shoot(direction); 
         }
     }
 

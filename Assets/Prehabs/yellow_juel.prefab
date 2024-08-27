@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5125866888767444058}
   - component: {fileID: 700447334207811850}
   - component: {fileID: 73704961693796919}
-  - component: {fileID: 8109830799374678699}
+  - component: {fileID: -7062777753576478133}
   m_Layer: 0
   m_Name: yellow_juel
   m_TagString: Untagged
@@ -128,8 +128,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 100
   destroyTime: 0
---- !u!61 &8109830799374678699
-BoxCollider2D:
+  gameoverText: {fileID: 0}
+  over: {fileID: 0}
+--- !u!58 &-7062777753576478133
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -161,15 +163,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.3, y: 1.73}
-    newSize: {x: 2.3, y: 1.73}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3, y: 1.73}
-  m_EdgeRadius: 0
+  m_Radius: 1.1499999

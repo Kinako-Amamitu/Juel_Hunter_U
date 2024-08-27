@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2515356594147094759}
   - component: {fileID: 2097231404806771285}
   - component: {fileID: 3079424045588693431}
-  - component: {fileID: 5536804235809734488}
+  - component: {fileID: -7502178743884444229}
   m_Layer: 0
   m_Name: pink_juel
   m_TagString: Untagged
@@ -128,8 +128,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 100
   destroyTime: 0
---- !u!61 &5536804235809734488
-BoxCollider2D:
+  gameoverText: {fileID: 0}
+  over: {fileID: 0}
+--- !u!58 &-7502178743884444229
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -161,15 +163,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.28, y: 1.71}
-    newSize: {x: 2.28, y: 1.71}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.28, y: 1.71}
-  m_EdgeRadius: 0
+  m_Radius: 1.1399999
