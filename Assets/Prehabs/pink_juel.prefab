@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -7502178743884444229}
   m_Layer: 0
   m_Name: pink_juel
-  m_TagString: Untagged
+  m_TagString: Purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   destroyTime: 0
   gameoverText: {fileID: 0}
   over: {fileID: 0}
+  juel: {fileID: 4162968277313547898}
 --- !u!58 &-7502178743884444229
 CircleCollider2D:
   m_ObjectHideFlags: 0

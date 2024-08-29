@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5068785612088357468}
   m_Layer: 0
   m_Name: bule_juel
-  m_TagString: Untagged
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   destroyTime: 0
   gameoverText: {fileID: 0}
   over: {fileID: 0}
+  juel: {fileID: 3429054592348906710}
 --- !u!50 &7588121842021507621
 Rigidbody2D:
   serializedVersion: 4

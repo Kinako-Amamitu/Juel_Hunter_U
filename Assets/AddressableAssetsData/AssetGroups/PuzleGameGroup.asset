@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: PuzleGameGroup
+  m_EditorClassIdentifier: 
+  m_GroupName: PuzleGameGroup
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bb50a9acb5a73204d915033f2b68b09c
+  m_SerializeEntries:
+  - m_GUID: 0b021d2fcb87ffa4a82ce83a42633bb4
+    m_Address: Stage1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9bacd228bc2e19e42b55ff460aeb052a
+    m_Address: Stage2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9a454bdbf64c84845bf57147ee5a17b1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 874cd3dde8cc3564abf3f589f38302fe, type: 2}

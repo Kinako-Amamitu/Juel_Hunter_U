@@ -12,6 +12,9 @@ TagManager:
   - Purple
   - Rail
   - Out
+  - Rail(right)
+  - Rail(down)
+  - juel
   layers:
   - Default
   - TransparentFX

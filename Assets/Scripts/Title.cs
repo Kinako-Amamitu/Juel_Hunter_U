@@ -27,12 +27,12 @@ public class Title : MonoBehaviour
                     StartCoroutine(NetworkManager.Instance.RegistUser(Guid.NewGuid().ToString(), result => {
                         //‰æ–Ê‘JˆÚ
                         Initiate.DoneFading();
-                    Initiate.Fade("GameScene", Color.black, 0.5f);}));
+                    Initiate.Fade("StageSelect", Color.black, 0.5f);}));
                 }
                 else {
                     //‰æ–Ê‘JˆÚ
                     Initiate.DoneFading();
-                    Initiate.Fade("GameScene", Color.black, 0.5f);
+                    Initiate.Fade("StageSelect", Color.black, 0.5f);
                 };
             }
         }
