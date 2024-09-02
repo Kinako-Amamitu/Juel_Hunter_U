@@ -11,20 +11,26 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float bulletSpeed;　// 弾の速度
     [SerializeField] private float destroyTime;　// 弾の生存期間
     [SerializeField] TextMeshProUGUI gameoverText; //ゲームオーバーのテキスト
+    [SerializeField] TextMeshProUGUI gamescoreText; //得点のテキスト
     [SerializeField] GameObject over; //レイ設定用オブジェクト
     [SerializeField] GameObject juel; //判定に使う用のジュエル
+
+   
+
     PlayerController player; //プレイヤー
+
+    GameGenerator gameGenerator;
+   
 
     int layerMask = 1 << 7;
     
-
-
 
 
     private void Start()
     {
        
         gameoverText=GameObject.Find("gameoverText").GetComponent<TextMeshProUGUI>();
+        gameGenerator = GameObject.Find("GameGenerator").GetComponent<GameGenerator>();
 
     }
 
@@ -81,15 +87,17 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+
         if (collision.gameObject.tag == "Rail(right)")
         {
             bool isSameright=false;
 
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0.3f, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0.2f, 0);
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position+transform.right*0.4f, transform.right, 0.6f);
 
             Debug.DrawRay(transform.position + transform.right * 0.4f, transform.right* 0.6f, Color.red, 5);
+            
 
             if (hit.collider)
             {
@@ -109,6 +117,9 @@ public class Bullet : MonoBehaviour
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
+
+                            gameGenerator.Quest(3);
+                            gameGenerator.AddScore(100);
                         }
                     }
                 }
@@ -119,7 +130,7 @@ public class Bullet : MonoBehaviour
         {
            bool isSameright = false;
 
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -0.3f);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -0.2f);
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.up * 0.4f, transform.up, 0.6f);
 
@@ -143,6 +154,8 @@ public class Bullet : MonoBehaviour
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
+
+                            gameGenerator.AddScore(100);
                         }
                     }
                 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class GameGenerator : MonoBehaviour
@@ -23,11 +24,17 @@ public class GameGenerator : MonoBehaviour
     //スコア
     int gameScore;
 
-   
+    //条件個数
+    int juelRequired=9;
+
+
 
     // UI
     [SerializeField] TextMeshProUGUI textGameScore;
     [SerializeField] TextMeshProUGUI textGameTimer;
+    [SerializeField] TextMeshProUGUI stageclearText;
+    [SerializeField] TextMeshProUGUI gameoverText;
+    [SerializeField] Text target1;
     
 
     //private float timer = 0f;       // タイマー
@@ -47,11 +54,19 @@ public class GameGenerator : MonoBehaviour
         gameTimer -= Time.deltaTime;
         textGameTimer.text = "" + (int)gameTimer;
 
-        //ゲーム終了
-        if (0 > gameTimer)
+        if(juelRequired<=0)
         {
-            
+            target1.text ="OK！！" ;
+            stageclearText.SetText("StageClear!!");
 
+            return;
+        }
+
+        //ゲーム終了
+        if (0 >= gameTimer)
+        {
+
+            gameoverText.SetText("GameOver!!");
             // Updateに入らないようにする
             enabled = false;
             // この時点でUpdateから抜ける
@@ -78,5 +93,17 @@ public class GameGenerator : MonoBehaviour
             // BulletのShootメソッドを呼び出して弾を発射
             bullet.Shoot(direction); 
         }
+    }
+
+    public void AddScore(int score)
+    {
+        gameScore += score;
+        textGameScore.text = gameScore.ToString();
+    }
+
+    public void Quest(int target)
+    {
+        juelRequired -= target;
+        target1.text = juelRequired.ToString();
     }
 }

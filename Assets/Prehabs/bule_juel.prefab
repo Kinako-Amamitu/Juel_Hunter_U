@@ -102,6 +102,7 @@ MonoBehaviour:
   bulletSpeed: 100
   destroyTime: 0
   gameoverText: {fileID: 0}
+  gamescoreText: {fileID: 0}
   over: {fileID: 0}
   juel: {fileID: 3429054592348906710}
 --- !u!50 &7588121842021507621
