@@ -21,11 +21,14 @@ public class GameGenerator : MonoBehaviour
     // 削除できるアイテム数
     [SerializeField] int deleteCount;
 
+    
+
+
     //スコア
     int gameScore;
 
     //条件個数
-    int juelRequired=9;
+    int juelRequired = 9;
 
 
 
@@ -35,6 +38,7 @@ public class GameGenerator : MonoBehaviour
     [SerializeField] TextMeshProUGUI stageclearText;
     [SerializeField] TextMeshProUGUI gameoverText;
     [SerializeField] Text target1;
+    [SerializeField] GameObject posemenuPanel;
     
 
     //private float timer = 0f;       // タイマー
@@ -59,6 +63,8 @@ public class GameGenerator : MonoBehaviour
             target1.text ="OK！！" ;
             stageclearText.SetText("StageClear!!");
 
+           
+
             return;
         }
 
@@ -69,7 +75,8 @@ public class GameGenerator : MonoBehaviour
             gameoverText.SetText("GameOver!!");
             // Updateに入らないようにする
             enabled = false;
-            // この時点でUpdateから抜ける
+          
+;            // この時点でUpdateから抜ける
             return;
         }
     }
@@ -95,15 +102,53 @@ public class GameGenerator : MonoBehaviour
         }
     }
 
+    //点数を加算させる
     public void AddScore(int score)
     {
         gameScore += score;
         textGameScore.text = gameScore.ToString();
     }
 
+    //クリア条件を達成させる
     public void Quest(int target)
     {
         juelRequired -= target;
         target1.text = juelRequired.ToString();
     }
+
+    /// <summary>
+    /// ポーズメニュー関連
+    /// </summary>
+    public void Pose()
+    {
+        Time.timeScale = 0;
+        posemenuPanel.SetActive(true);
+    }
+
+    //リスタートする
+    public void Restart()
+    {
+        posemenuPanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    //最初からやり直す
+    public void Reset()
+    {
+        Time.timeScale = 1;
+        //画面遷移
+        Initiate.DoneFading();
+        Initiate.Fade("Stage1", Color.black, 0.5f);
+    
+    }
+
+    //ステージセレクトに戻る
+    public void StageSelect()
+    {
+        Time.timeScale = 1;
+        //画面遷移
+        Initiate.DoneFading();
+        Initiate.Fade("StageSelect", Color.black, 0.5f);
+    }
+
 }

@@ -78,6 +78,7 @@ public class Bullet : MonoBehaviour
         if(collision.gameObject.tag=="Out")
         {
             gameoverText.SetText("GameOver!!");
+            return;
         }
         else if(collision.gameObject.tag=="LeftWall")
         {
