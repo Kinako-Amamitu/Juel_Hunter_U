@@ -15,11 +15,12 @@ public class Bullet : MonoBehaviour
     [SerializeField] GameObject over; //レイ設定用オブジェクト
     [SerializeField] GameObject juel; //判定に使う用のジュエル
 
-   
+
 
     PlayerController player; //プレイヤー
 
-    GameGenerator gameGenerator;
+    [SerializeField] GameGenerator gameGenerator;
+    //PlayerController playerController;
    
 
     int layerMask = 1 << 7;
@@ -31,7 +32,7 @@ public class Bullet : MonoBehaviour
        
         gameoverText=GameObject.Find("gameoverText").GetComponent<TextMeshProUGUI>();
         gameGenerator = GameObject.Find("GameGenerator").GetComponent<GameGenerator>();
-
+        GetComponent<ObjCtrl>();
     }
 
     private void Update()
@@ -77,8 +78,10 @@ public class Bullet : MonoBehaviour
         */
         if(collision.gameObject.tag=="Out")
         {
-            gameoverText.SetText("GameOver!!");
-            return;
+            GameObject.Find("Player").GetComponent<ObjCtrl>().isgameMode = true;
+
+            gameGenerator.GameOver();
+           
         }
         else if(collision.gameObject.tag=="LeftWall")
         {

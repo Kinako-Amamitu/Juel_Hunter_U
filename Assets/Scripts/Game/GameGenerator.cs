@@ -21,8 +21,8 @@ public class GameGenerator : MonoBehaviour
     // 削除できるアイテム数
     [SerializeField] int deleteCount;
 
-    
 
+    ObjCtrl obj;
 
     //スコア
     int gameScore;
@@ -30,6 +30,9 @@ public class GameGenerator : MonoBehaviour
     //条件個数
     int juelRequired = 9;
 
+    //ゲームの判定
+    public bool isgameOver=false;
+    public bool isgameClear = false;
 
 
     // UI
@@ -45,7 +48,7 @@ public class GameGenerator : MonoBehaviour
 
     private void Start()
     {
-      
+        obj = GetComponent<ObjCtrl>();
         
         // 全アイテム
         bullets = new List<GameObject>();
@@ -61,18 +64,18 @@ public class GameGenerator : MonoBehaviour
         if(juelRequired<=0)
         {
             target1.text ="OK！！" ;
-            stageclearText.SetText("StageClear!!");
 
-           
-
-            return;
+            GameClear();
         }
 
         //ゲーム終了
         if (0 >= gameTimer)
         {
+            
+         
 
-            gameoverText.SetText("GameOver!!");
+            GameOver();
+
             // Updateに入らないようにする
             enabled = false;
           
@@ -86,10 +89,20 @@ public class GameGenerator : MonoBehaviour
     /// </summary>
     public void FireBullet()
     {
+        if(isgameOver==true)
+        {
+            return;
+        }
+        else if(isgameClear==true)
+        {
+            return;
+        }
+
         // 色ランダム
-        int rnd = Random.Range(0, bulletPrefab.Count);
+       int rnd = Random.Range(0, juelPrefabs.Count);
+
         // 弾の生成
-    Bullet bullet = Instantiate(bulletPrefab[rnd], firePoint.position, Quaternion.identity);
+        Bullet bullet = Instantiate(bulletPrefab[rnd], firePoint.position, Quaternion.identity);
 
         if (playerController != null)
         {
@@ -149,6 +162,24 @@ public class GameGenerator : MonoBehaviour
         //画面遷移
         Initiate.DoneFading();
         Initiate.Fade("StageSelect", Color.black, 0.5f);
+    }
+
+    //ゲームオーバーを判定する
+    public void GameOver()
+    {
+        gameoverText.SetText("GameOver!!");
+        isgameOver = true;
+        GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
+        Time.timeScale = 0;
+    }
+
+    //ゲームクリアを判定する
+    public void GameClear()
+    {
+        stageclearText.SetText("StageClear!!");
+        isgameClear = true;
+        GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
+        Time.timeScale = 0;
     }
 
 }

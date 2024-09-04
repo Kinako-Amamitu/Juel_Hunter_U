@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,12 +11,18 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 lookDirection = new Vector3(0, -1.0f,0);      // キャラの向きの情報の設定用
 
+    [SerializeField] List<Bullet> juelPrefabs; //判定に使う用のジュエルプレハブ
+
+    int juelRnd; //ジュエルのランダムなID
+
+    Bullet nextBullet; //次のバレット
+
 
     private void Start()
     {
 
         TryGetComponent(out rb);
-      
+
     }
 
     private void Update()
@@ -31,22 +38,39 @@ public class PlayerController : MonoBehaviour
             RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
 
             //Rayが何かに衝突したことを検知 & 衝突した対象が自分自身かを判別
-            if (hit2d && hit2d.transform.gameObject.tag=="Player")
+            if (hit2d && hit2d.transform.gameObject.tag == "Player")
             {
                 gameGenerator.FireBullet();
+
 
 
             }
 
         }
     }
-            /// <summary>
-            /// プレイヤーの進行方向の取得用
-            /// </summary>
-            /// <returns></returns>
-     public Vector3 GetLookDirection()
+
+    private void FixedUpdate()
+    {
+        
+    }
+    /// <summary>
+    /// プレイヤーの進行方向の取得用
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetLookDirection()
     {
         Vector3 direction = new Vector3(-Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad), Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad));
         return direction;
+    }
+
+    public void SiteJuel(int rnd)
+    {
+        // 表示位置
+        Vector3 setupPosition = new Vector3(-2.5f, 0, 0);
+
+        // ブロック生成
+        Bullet prefab = juelPrefabs[rnd];
+        Instantiate(prefab, setupPosition, Quaternion.identity);
+
     }
 }
