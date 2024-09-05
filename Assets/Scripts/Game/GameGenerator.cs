@@ -34,6 +34,8 @@ public class GameGenerator : MonoBehaviour
     public bool isgameOver=false;
     public bool isgameClear = false;
 
+    Bullet bullet;
+
 
     // UI
     [SerializeField] TextMeshProUGUI textGameScore;
@@ -52,6 +54,8 @@ public class GameGenerator : MonoBehaviour
         
         // 全アイテム
         bullets = new List<GameObject>();
+
+        StartCoroutine(UpdateBullet());
     }
 
     private void Update()
@@ -82,6 +86,11 @@ public class GameGenerator : MonoBehaviour
 ;            // この時点でUpdateから抜ける
             return;
         }
+
+        if(bullet!=null)
+        {
+            bullet.transform.position = new Vector3(firePoint.transform.position.x, firePoint.transform.position.y, bullet.transform.position.z);
+        }
     }
 
     /// <summary>
@@ -98,20 +107,21 @@ public class GameGenerator : MonoBehaviour
             return;
         }
 
-        // 色ランダム
-       int rnd = Random.Range(0, juelPrefabs.Count);
-
-        // 弾の生成
-        Bullet bullet = Instantiate(bulletPrefab[rnd], firePoint.position, Quaternion.identity);
-
-        if (playerController != null)
+        if (bullet != null)
         {
+            if (playerController != null)
+            {
 
-            // PlayerControllerから向いている方向を取得
-            Vector3 direction = playerController.GetLookDirection();
+                // PlayerControllerから向いている方向を取得
+                Vector3 direction = playerController.GetLookDirection();
 
-            // BulletのShootメソッドを呼び出して弾を発射
-            bullet.Shoot(direction); 
+                // BulletのShootメソッドを呼び出して弾を発射
+                bullet.Shoot(direction);
+
+                bullet = null;
+
+                StartCoroutine(UpdateBullet());
+            }
         }
     }
 
@@ -180,6 +190,17 @@ public class GameGenerator : MonoBehaviour
         isgameClear = true;
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
         Time.timeScale = 0;
+    }
+
+    private IEnumerator UpdateBullet()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        // 色ランダム
+        int rnd = Random.Range(0, juelPrefabs.Count);
+
+        // 弾の生成
+        bullet = Instantiate(bulletPrefab[rnd], firePoint.position + new Vector3(0, 0, -1.0f), Quaternion.identity);
     }
 
 }

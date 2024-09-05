@@ -6,6 +6,9 @@ public class SpawnJuel : MonoBehaviour
 {
     [SerializeField] List<GameObject> juelPrefabs;
     [SerializeField] int juelLayer;
+
+    int rnd1=-1;
+    int rnd2=-1;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,23 @@ public class SpawnJuel : MonoBehaviour
         {
             // 色ランダム
             int rnd = Random.Range(0, juelPrefabs.Count);
+
+            while (true)
+            {
+                if (rnd1 == rnd2 && rnd == rnd1)
+                {
+                    // 色ランダム
+                    rnd = Random.Range(0, juelPrefabs.Count);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            rnd2 = rnd1;
+            rnd1 = rnd;
+
+
             // 弾の生成
             Instantiate(juelPrefabs[rnd], transform.position+Vector3.right*0.005f, Quaternion.identity);
         }
