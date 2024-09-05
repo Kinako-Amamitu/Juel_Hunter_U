@@ -159,6 +159,7 @@ public class Bullet : MonoBehaviour
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
 
+                            gameGenerator.Quest(3);
                             gameGenerator.AddScore(100);
                         }
                     }
