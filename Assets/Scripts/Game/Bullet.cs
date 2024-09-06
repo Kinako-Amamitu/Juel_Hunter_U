@@ -167,6 +167,43 @@ public class Bullet : MonoBehaviour
 
             }
         }
+        else if (collision.gameObject.tag == "Rail(down)(slow)")
+        {
+            bool isSameright = false;
+
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -0.1f);
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + transform.up * 0.4f, transform.up, 0.6f);
+
+            Debug.DrawRay(transform.position + transform.up * 0.4f, transform.up * 0.6f, Color.red, 5);
+
+            if (hit.collider)
+            {
+                if (hit.collider.tag == gameObject.tag)
+                {
+                    isSameright = true;
+
+                    RaycastHit2D hit2 = Physics2D.Raycast(transform.position - transform.up * 0.4f, transform.up * -1, 0.6f);
+
+                    Debug.DrawRay(transform.position - transform.up * 0.4f, transform.up * -0.6f, Color.red, 5);
+
+                    if (hit2.collider)
+                    {
+                        if (hit2.collider.tag == gameObject.tag)
+                        {
+                            //左右のジュエルと自身を消す
+                            Destroy(gameObject);
+                            Destroy(hit2.collider.gameObject);
+                            Destroy(hit.collider.gameObject);
+
+                            gameGenerator.Quest(3);
+                            gameGenerator.AddScore(100);
+                        }
+                    }
+                }
+
+            }
+        }
         else if (collision.gameObject.tag == "Rail(left)")
         {
             bool isSameright = false;

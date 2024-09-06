@@ -16,6 +16,7 @@ TagManager:
   - Rail(down)
   - juel
   - Rail(left)
+  - Rail(down)(slow)
   layers:
   - Default
   - TransparentFX
