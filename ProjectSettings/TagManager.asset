@@ -17,6 +17,10 @@ TagManager:
   - juel
   - Rail(left)
   - Rail(down)(slow)
+  - Rail(up)
+  - Black_hole
+  - Enemy_Hole
+  - Enemy
   layers:
   - Default
   - TransparentFX

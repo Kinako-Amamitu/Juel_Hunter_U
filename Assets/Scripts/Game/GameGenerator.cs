@@ -14,6 +14,7 @@ public class GameGenerator : MonoBehaviour
     [SerializeField] List<GameObject> juelPrefabs; //判定に使う用のジュエルプレハブ
     [SerializeField] private Transform outZone; //ゲームオーバー判定位置
     [SerializeField] float gameTimer; //ゲーム時間
+    [SerializeField]int juelRequired; //条件個数
 
     //フィールド上のアイテム
     List<GameObject> bullets;
@@ -27,8 +28,7 @@ public class GameGenerator : MonoBehaviour
     //スコア
     int gameScore;
 
-    //条件個数
-    int juelRequired = 9;
+    
 
     //ゲームの判定
     public bool isgameOver=false;
@@ -50,11 +50,16 @@ public class GameGenerator : MonoBehaviour
 
     private void Start()
     {
+        //オブジェクトクラスを取得
         obj = GetComponent<ObjCtrl>();
-        
+
+        //クリア条件初期化
+        target1.text = juelRequired.ToString();
+
         // 全アイテム
         bullets = new List<GameObject>();
 
+        //初弾のジュエルを抽選
         StartCoroutine(UpdateBullet());
     }
 
