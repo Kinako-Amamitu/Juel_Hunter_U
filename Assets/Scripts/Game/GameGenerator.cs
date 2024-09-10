@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameGenerator : MonoBehaviour
@@ -28,6 +29,9 @@ public class GameGenerator : MonoBehaviour
     //スコア
     int gameScore;
 
+    //シーンの判定変数
+    static int currentStage;
+
     
 
     //ゲームの判定
@@ -44,6 +48,7 @@ public class GameGenerator : MonoBehaviour
     [SerializeField] TextMeshProUGUI gameoverText;
     [SerializeField] Text target1;
     [SerializeField] GameObject posemenuPanel;
+    [SerializeField] GameObject gameoverPanel;
     
 
     //private float timer = 0f;       // タイマー
@@ -65,7 +70,14 @@ public class GameGenerator : MonoBehaviour
 
     private void Update()
     {
-
+        if (isgameOver == true)
+        {
+            return;
+        }
+        else if (isgameClear == true)
+        {
+            return;
+        }
         // ゲームタイマー更新
         gameTimer -= Time.deltaTime;
         textGameTimer.text = "" + (int)gameTimer;
@@ -183,6 +195,7 @@ public class GameGenerator : MonoBehaviour
     public void GameOver()
     {
         gameoverText.SetText("GameOver!!");
+        gameoverPanel.SetActive(true);
         isgameOver = true;
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
         Time.timeScale = 0;
@@ -195,6 +208,23 @@ public class GameGenerator : MonoBehaviour
         isgameClear = true;
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
         Time.timeScale = 0;
+
+        Result();
+    }
+
+    public void Result()
+    {
+        Time.timeScale = 1;
+        //画面遷移
+        Initiate.DoneFading();
+        Initiate.Fade("ResultScene", Color.white, 1.0f);
+    }
+
+    public void Retry()
+    {
+        Time.timeScale = 1;
+
+        SceneManager.LoadScene("Stage" + currentStage);
     }
 
     private IEnumerator UpdateBullet()
@@ -208,4 +238,12 @@ public class GameGenerator : MonoBehaviour
         bullet = Instantiate(bulletPrefab[rnd], firePoint.position + new Vector3(0, 0, -1.0f), Quaternion.identity);
     }
 
+   static public void UpdateStageScene(int currentScene)
+    {
+        currentStage = currentScene;
+
+        //画面遷移
+        Initiate.DoneFading();
+        Initiate.Fade("Stage"+currentStage, Color.white, 1.0f);
+    }
 }

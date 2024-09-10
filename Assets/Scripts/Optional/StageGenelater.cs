@@ -16,10 +16,8 @@ public class StageGenelater : MonoBehaviour
         
     }
 
-    public void StageSelector()
+    public void StageSelector(int stageNum)
     {
-        //‰æ–Ê‘JˆÚ
-        Initiate.DoneFading();
-        Initiate.Fade("Stage1", Color.black, 0.5f);
+        GameGenerator.UpdateStageScene(stageNum);
     }
 }
