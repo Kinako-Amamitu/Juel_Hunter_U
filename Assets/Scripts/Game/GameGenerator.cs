@@ -90,7 +90,7 @@ public class GameGenerator : MonoBehaviour
         }
 
         //ƒQ[ƒ€I—¹
-        if (0 >= gameTimer)
+        if (gameTimer <= 0)
         {
             
          

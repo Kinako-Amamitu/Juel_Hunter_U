@@ -64,6 +64,11 @@ public class Bullet : MonoBehaviour
         //Destroy(gameObject, destroyTime);
     }
 
+    public void Bomb()
+    {
+        Destroy(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         /*
