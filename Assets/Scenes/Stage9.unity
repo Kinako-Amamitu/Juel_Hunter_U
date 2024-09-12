@@ -1374,6 +1374,8 @@ MonoBehaviour:
   target1: {fileID: 1791108467}
   posemenuPanel: {fileID: 1931016338}
   gameoverPanel: {fileID: 2050047860}
+  sound1: {fileID: 8300000, guid: 4def28eca43a074459fe3e9618c78c81, type: 3}
+  gameOver: {fileID: 8300000, guid: af0d56af418ffb5459263644e40d22b9, type: 3}
 --- !u!4 &432465263
 Transform:
   m_ObjectHideFlags: 0
@@ -2361,9 +2363,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.00024986267
     width: 1
-    height: 1
+    height: 0.9995003
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

@@ -1574,6 +1574,8 @@ MonoBehaviour:
   target1: {fileID: 419299039}
   posemenuPanel: {fileID: 493220138}
   gameoverPanel: {fileID: 1544125962}
+  sound1: {fileID: 8300000, guid: 4def28eca43a074459fe3e9618c78c81, type: 3}
+  gameOver: {fileID: 8300000, guid: af0d56af418ffb5459263644e40d22b9, type: 3}
 --- !u!4 &432465263
 Transform:
   m_ObjectHideFlags: 0

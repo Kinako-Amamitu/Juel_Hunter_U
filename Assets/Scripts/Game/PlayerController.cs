@@ -17,11 +17,15 @@ public class PlayerController : MonoBehaviour
 
     Bullet nextBullet; //次のバレット
 
+    
+
 
     private void Start()
     {
 
         TryGetComponent(out rb);
+
+        
 
     }
 
@@ -40,6 +44,7 @@ public class PlayerController : MonoBehaviour
             //Rayが何かに衝突したことを検知 & 衝突した対象が自分自身かを判別
             if (hit2d && hit2d.transform.gameObject.tag == "Player")
             {
+                
                 gameGenerator.FireBullet();
 
 

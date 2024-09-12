@@ -39,6 +39,7 @@ public class GameGenerator : MonoBehaviour
     public bool isgameClear = false;
 
     Bullet bullet;
+    Result result;
 
 
     // UI
@@ -49,7 +50,11 @@ public class GameGenerator : MonoBehaviour
     [SerializeField] Text target1;
     [SerializeField] GameObject posemenuPanel;
     [SerializeField] GameObject gameoverPanel;
-    
+
+    //SE
+    public AudioClip sound1;
+    public AudioClip gameOver;
+    AudioSource audioSource;
 
     //private float timer = 0f;       // タイマー
 
@@ -57,6 +62,9 @@ public class GameGenerator : MonoBehaviour
     {
         //オブジェクトクラスを取得
         obj = GetComponent<ObjCtrl>();
+
+        //AudioComponentを取得
+        audioSource = GetComponent<AudioSource>();
 
         //クリア条件初期化
         target1.text = juelRequired.ToString();
@@ -129,6 +137,8 @@ public class GameGenerator : MonoBehaviour
             if (playerController != null)
             {
 
+                audioSource.PlayOneShot(sound1);
+
                 // PlayerControllerから向いている方向を取得
                 Vector3 direction = playerController.GetLookDirection();
 
@@ -195,6 +205,7 @@ public class GameGenerator : MonoBehaviour
     public void GameOver()
     {
         gameoverText.SetText("GameOver!!");
+        audioSource.PlayOneShot(gameOver);
         gameoverPanel.SetActive(true);
         isgameOver = true;
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
@@ -218,6 +229,7 @@ public class GameGenerator : MonoBehaviour
         //画面遷移
         Initiate.DoneFading();
         Initiate.Fade("ResultScene", Color.white, 1.0f);
+        result.SetScore(currentStage,gameScore);
     }
 
     public void Retry()
