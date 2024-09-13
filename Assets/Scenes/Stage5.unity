@@ -1577,8 +1577,8 @@ MonoBehaviour:
   - {fileID: 9149540444684222356, guid: bdb1840ce6ffff14e9ae8bafa2285e2d, type: 3}
   - {fileID: 9169416433727246376, guid: 8c61aa8a906b80543b98ccaaa54ec89f, type: 3}
   outZone: {fileID: 562567609}
-  gameTimer: 90
-  juelRequired: 3
+  gameTimer: 150
+  juelRequired: 12
   playerNum: 1
   deleteCount: 3
   isgameOver: 0
