@@ -15,26 +15,34 @@ public class Title : MonoBehaviour
     void Update()
     {
         //ƒ^ƒbƒ`‚µ‚½‚Æ‚«
-        if (Input.touchCount > 0)
+        /*if (Input.touchCount > 0)
         {
             Touch t1 = Input.GetTouch(0);
             if (t1.phase == TouchPhase.Began)
             {
-                bool isSuccess = NetworkManager.Instance.LoadUserData();
-                if (!isSuccess)
-                {
-                    //ƒ†[ƒU[ƒf[ƒ^‚ª•Û‘¶‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í“o˜^
-                    StartCoroutine(NetworkManager.Instance.RegistUser(Guid.NewGuid().ToString(), result => {
-                        //‰æ–Ê‘JˆÚ
-                        Initiate.DoneFading();
-                    Initiate.Fade("StageSelect", Color.black, 0.5f);}));
-                }
-                else {
-                    //‰æ–Ê‘JˆÚ
-                    Initiate.DoneFading();
-                    Initiate.Fade("StageSelect", Color.black, 0.5f);
-                };
+                
             }
         }
+        */
+    }
+
+    public void GameStart()
+    {
+        bool isSuccess = NetworkManager.Instance.LoadUserData();
+        if (!isSuccess)
+        {
+            //ƒ†[ƒU[ƒf[ƒ^‚ª•Û‘¶‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í“o˜^
+            StartCoroutine(NetworkManager.Instance.RegistUser(Guid.NewGuid().ToString(), result => {
+                //‰æ–Ê‘JˆÚ
+                Initiate.DoneFading();
+                Initiate.Fade("StageSelect", Color.black, 0.5f);
+            }));
+        }
+        else
+        {
+            //‰æ–Ê‘JˆÚ
+            Initiate.DoneFading();
+            Initiate.Fade("StageSelect", Color.black, 0.5f);
+        };
     }
 }

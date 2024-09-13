@@ -21,6 +21,7 @@ TagManager:
   - Black_hole
   - Enemy_Hole
   - Enemy
+  - Player2
   layers:
   - Default
   - TransparentFX

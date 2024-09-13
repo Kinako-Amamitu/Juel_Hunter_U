@@ -14,11 +14,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] TextMeshProUGUI gamescoreText; //得点のテキスト
     [SerializeField] GameObject over; //レイ設定用オブジェクト
     [SerializeField] GameObject juel; //判定に使う用のジュエル
-
-
-
-    PlayerController player; //プレイヤー
-
     [SerializeField] GameGenerator gameGenerator;
     //PlayerController playerController;
    
@@ -42,14 +37,12 @@ public class Bullet : MonoBehaviour
     /// <summary>
     /// バレット発射
     /// </summary>
-    public void Shoot(Vector2 direction)
+    public void Shoot(Vector2 direction,PlayerController player)
     {
 
         // 弾に Rigidbody2D コンポーネントがアタッチされているか確認した上で
         if (TryGetComponent(out Rigidbody2D rb))
         {
-
-            player = GameObject.Find("Player").GetComponent<PlayerController>();
 
            RaycastHit2D hit=Physics2D.Raycast(player.transform.position, player.GetLookDirection(),10.0f, layerMask);
             if (hit.collider)

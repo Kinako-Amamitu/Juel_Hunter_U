@@ -9,16 +9,14 @@ using UnityEngine.SceneManagement;
 public class GameGenerator : MonoBehaviour
 {
     [SerializeField] List<Bullet> bulletPrefab;     // 弾のプレファブ
-    [SerializeField] private Transform firePoint;     // 発射ポイント
+    [SerializeField] private Transform[] firePoint;     // 発射ポイント
     //[SerializeField] private float fireRate = 2.0f;   // 発射間隔(秒)
-    [SerializeField] private PlayerController playerController;      // PlayerControllerへの参照
+    [SerializeField] private PlayerController[] playerController;      // PlayerControllerへの参照
     [SerializeField] List<GameObject> juelPrefabs; //判定に使う用のジュエルプレハブ
     [SerializeField] private Transform outZone; //ゲームオーバー判定位置
     [SerializeField] float gameTimer; //ゲーム時間
     [SerializeField]int juelRequired; //条件個数
-
-    //フィールド上のアイテム
-    List<GameObject> bullets;
+    [SerializeField] int playerNum; //プレイヤー数
 
     // 削除できるアイテム数
     [SerializeField] int deleteCount;
@@ -38,7 +36,7 @@ public class GameGenerator : MonoBehaviour
     public bool isgameOver=false;
     public bool isgameClear = false;
 
-    Bullet bullet;
+    Bullet[] bullet;
     Result result;
 
 
@@ -52,9 +50,14 @@ public class GameGenerator : MonoBehaviour
     [SerializeField] GameObject gameoverPanel;
 
     //SE
-    public AudioClip sound1;
-    public AudioClip gameOver;
-    AudioSource audioSource;
+    public AudioClip sound1; //発射音
+    public AudioClip gameOver; //ゲームオーバー時
+    public AudioClip gameClear; //ゲームクリア時
+    public AudioClip pageUp; //メニューを開く
+    public AudioClip pageDown; //メニューを閉じる
+    public AudioClip select; //汎用決定音
+    public AudioClip cancel; //汎用キャンセル音
+    AudioSource audioSource; //SE入力にオーディオソースを使用する
 
     //private float timer = 0f;       // タイマー
 
@@ -63,17 +66,20 @@ public class GameGenerator : MonoBehaviour
         //オブジェクトクラスを取得
         obj = GetComponent<ObjCtrl>();
 
+        bullet = new Bullet[playerNum];
+
         //AudioComponentを取得
         audioSource = GetComponent<AudioSource>();
 
         //クリア条件初期化
         target1.text = juelRequired.ToString();
 
-        // 全アイテム
-        bullets = new List<GameObject>();
-
         //初弾のジュエルを抽選
-        StartCoroutine(UpdateBullet());
+        for(int i=0;i<playerNum;i++)
+        {
+            StartCoroutine(UpdateBullet(i));
+        }
+        
     }
 
     private void Update()
@@ -112,16 +118,19 @@ public class GameGenerator : MonoBehaviour
             return;
         }
 
-        if(bullet!=null)
+        for (int i = 0; i < playerNum; i++)
         {
-            bullet.transform.position = new Vector3(firePoint.transform.position.x, firePoint.transform.position.y, bullet.transform.position.z);
+            if (bullet[i] != null)
+            {
+                bullet[i].transform.position = new Vector3(firePoint[i].transform.position.x, firePoint[i].transform.position.y, bullet[i].transform.position.z);
+            }
         }
     }
 
     /// <summary>
     /// 弾の生成
     /// </summary>
-    public void FireBullet()
+    public void FireBullet(int Num)
     {
         if(isgameOver==true)
         {
@@ -132,22 +141,23 @@ public class GameGenerator : MonoBehaviour
             return;
         }
 
-        if (bullet != null)
+
+        if (bullet[Num] != null)
         {
-            if (playerController != null)
+            if (playerController[Num] != null)
             {
 
                 audioSource.PlayOneShot(sound1);
 
                 // PlayerControllerから向いている方向を取得
-                Vector3 direction = playerController.GetLookDirection();
+                Vector3 direction = playerController[Num].GetLookDirection();
 
                 // BulletのShootメソッドを呼び出して弾を発射
-                bullet.Shoot(direction);
+                bullet[Num].Shoot(direction,playerController[Num]);
 
-                bullet = null;
+                bullet[Num] = null;
 
-                StartCoroutine(UpdateBullet());
+                StartCoroutine(UpdateBullet(Num));
             }
         }
     }
@@ -171,6 +181,7 @@ public class GameGenerator : MonoBehaviour
     /// </summary>
     public void Pose()
     {
+        audioSource.PlayOneShot(pageUp);
         Time.timeScale = 0;
         posemenuPanel.SetActive(true);
     }
@@ -180,22 +191,14 @@ public class GameGenerator : MonoBehaviour
     {
         posemenuPanel.SetActive(false);
         Time.timeScale = 1;
-    }
-
-    //最初からやり直す
-    public void Reset()
-    {
-        Time.timeScale = 1;
-        //画面遷移
-        Initiate.DoneFading();
-        Initiate.Fade("Stage1", Color.black, 0.5f);
-    
+        audioSource.PlayOneShot(pageDown);
     }
 
     //ステージセレクトに戻る
     public void StageSelect()
     {
         Time.timeScale = 1;
+        audioSource.PlayOneShot(cancel);
         //画面遷移
         Initiate.DoneFading();
         Initiate.Fade("StageSelect", Color.black, 0.5f);
@@ -215,6 +218,7 @@ public class GameGenerator : MonoBehaviour
     //ゲームクリアを判定する
     public void GameClear()
     {
+        audioSource.PlayOneShot(gameClear);
         stageclearText.SetText("StageClear!!");
         isgameClear = true;
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
@@ -234,12 +238,13 @@ public class GameGenerator : MonoBehaviour
 
     public void Retry()
     {
+        audioSource.PlayOneShot(select);
         Time.timeScale = 1;
 
         SceneManager.LoadScene("Stage" + currentStage);
     }
 
-    private IEnumerator UpdateBullet()
+    private IEnumerator UpdateBullet(int Num)
     {
         yield return new WaitForSeconds(1.0f);
 
@@ -247,7 +252,7 @@ public class GameGenerator : MonoBehaviour
         int rnd = Random.Range(0, juelPrefabs.Count);
 
         // 弾の生成
-        bullet = Instantiate(bulletPrefab[rnd], firePoint.position + new Vector3(0, 0, -1.0f), Quaternion.identity);
+        bullet[Num] = Instantiate(bulletPrefab[rnd], firePoint[Num].position + new Vector3(0, 0, -1.0f), Quaternion.identity);
     }
 
    static public void UpdateStageScene(int currentScene)

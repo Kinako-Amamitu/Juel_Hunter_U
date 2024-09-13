@@ -5,17 +5,9 @@ public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] GameGenerator gameGenerator;
+    [SerializeField] string playerTag;
+    [SerializeField] int playerNum;
 
-    private Rigidbody2D rb;     // コンポーネントの取得用
-  
-
-    private Vector3 lookDirection = new Vector3(0, -1.0f,0);      // キャラの向きの情報の設定用
-
-    [SerializeField] List<Bullet> juelPrefabs; //判定に使う用のジュエルプレハブ
-
-    int juelRnd; //ジュエルのランダムなID
-
-    Bullet nextBullet; //次のバレット
 
     
 
@@ -23,7 +15,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
 
-        TryGetComponent(out rb);
 
         
 
@@ -42,10 +33,10 @@ public class PlayerController : MonoBehaviour
             RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
 
             //Rayが何かに衝突したことを検知 & 衝突した対象が自分自身かを判別
-            if (hit2d && hit2d.transform.gameObject.tag == "Player")
+            if (hit2d && hit2d.transform.gameObject.tag == playerTag)
             {
                 
-                gameGenerator.FireBullet();
+                gameGenerator.FireBullet(playerNum);
 
 
 
@@ -68,14 +59,4 @@ public class PlayerController : MonoBehaviour
         return direction;
     }
 
-    public void SiteJuel(int rnd)
-    {
-        // 表示位置
-        Vector3 setupPosition = new Vector3(-2.5f, 0, 0);
-
-        // ブロック生成
-        Bullet prefab = juelPrefabs[rnd];
-        Instantiate(prefab, setupPosition, Quaternion.identity);
-
-    }
 }
