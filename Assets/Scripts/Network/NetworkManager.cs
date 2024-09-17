@@ -11,7 +11,7 @@ public class NetworkManager : MonoBehaviour
 
     private static NetworkManager instance;
 
-    const string API_BASE_URL = "http://localhost:8000/api/";
+    const string API_BASE_URL = "https://api-juelhunter.japaneast.cloudapp.azure.com/api/";
     private int userID = 0;  //自分のユーザーID
     private string userName = ""; //自分のユーザー名
 
