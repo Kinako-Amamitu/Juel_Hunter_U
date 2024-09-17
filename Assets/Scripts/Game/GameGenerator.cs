@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class GameGenerator : MonoBehaviour
 {
@@ -21,14 +21,14 @@ public class GameGenerator : MonoBehaviour
     // 削除できるアイテム数
     [SerializeField] int deleteCount;
 
-
+    //オブジェクト関数への
     ObjCtrl obj;
 
     //スコア
-    int gameScore;
+    public static int gameScore;
 
     //シーンの判定変数
-    static int currentStage;
+    public static int currentStage;
 
     
 
@@ -67,6 +67,9 @@ public class GameGenerator : MonoBehaviour
         obj = GetComponent<ObjCtrl>();
 
         bullet = new Bullet[playerNum];
+
+        //リザルトを取得
+        result = GetComponent<Result>();
 
         //AudioComponentを取得
         audioSource = GetComponent<AudioSource>();
@@ -218,8 +221,10 @@ public class GameGenerator : MonoBehaviour
     //ゲームクリアを判定する
     public void GameClear()
     {
+        NetworkManager.Instance.StageProgress(currentStage);
         audioSource.PlayOneShot(gameClear);
         stageclearText.SetText("StageClear!!");
+        AddScore((int)Math.Ceiling(gameTimer)*30);
         isgameClear = true;
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
         Time.timeScale = 0;
@@ -233,7 +238,7 @@ public class GameGenerator : MonoBehaviour
         //画面遷移
         Initiate.DoneFading();
         Initiate.Fade("ResultScene", Color.white, 1.0f);
-        result.SetScore(currentStage,gameScore);
+        
     }
 
     public void Retry()
@@ -249,7 +254,7 @@ public class GameGenerator : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         // 色ランダム
-        int rnd = Random.Range(0, juelPrefabs.Count);
+        int rnd = UnityEngine.Random.Range(0, juelPrefabs.Count);
 
         // 弾の生成
         bullet[Num] = Instantiate(bulletPrefab[rnd], firePoint[Num].position + new Vector3(0, 0, -1.0f), Quaternion.identity);
@@ -262,5 +267,15 @@ public class GameGenerator : MonoBehaviour
         //画面遷移
         Initiate.DoneFading();
         Initiate.Fade("Stage"+currentStage, Color.white, 1.0f);
+    }
+
+    public static int Scoreset()
+    {
+        return gameScore;
+    }
+
+    public static int Stageset()
+    {
+        return currentStage;
     }
 }

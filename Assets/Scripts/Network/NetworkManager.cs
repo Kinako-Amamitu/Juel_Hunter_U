@@ -15,6 +15,13 @@ public class NetworkManager : MonoBehaviour
     private int userID = 0;  //自分のユーザーID
     private string userName = ""; //自分のユーザー名
 
+    private int stageClearNumber=0; //ステージクリア状況
+
+    public int stageCullentClear
+    {
+        get { return stageClearNumber; }
+    }
+
     public static NetworkManager Instance
     {
         get
@@ -65,6 +72,7 @@ public class NetworkManager : MonoBehaviour
     {
         SaveData saveData = new SaveData();
         saveData.userName = this.userName;
+        saveData.stageClearNumber = this.stageClearNumber;
         saveData.userID = this.userID;
         string json = JsonConvert.SerializeObject(saveData);
         var writer = new StreamWriter(Application.persistentDataPath + "/saveData.json");
@@ -87,8 +95,18 @@ public class NetworkManager : MonoBehaviour
         SaveData saveData = JsonConvert.DeserializeObject<SaveData>(json);
         this.userID = saveData.userID;
         this.userName = saveData.userName;
+        this.stageClearNumber = saveData.stageClearNumber;
 
         return true;
+    }
+
+    public void StageProgress(int number)
+    {
+        if(number > stageClearNumber)
+        {
+            stageClearNumber++;
+            SaveUserData();
+        }
     }
 }
 

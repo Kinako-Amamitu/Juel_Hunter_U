@@ -7,11 +7,20 @@ using UnityEngine.UI;
 public class Result : MonoBehaviour
 {
     [SerializeField] Text stage;
-    [SerializeField] Text score;
+    [SerializeField] Text scoreText;
+
+    int stageCullent;
+    int score;
     // Start is called before the first frame update
     void Start()
     {
-        
+        stageCullent = GameGenerator.Stageset();
+
+        stage.text = string.Format("STAGE {0}", stageCullent);
+
+        score = GameGenerator.Scoreset();
+
+        scoreText.text = string.Format("Score:{0}", score);
     }
 
     // Update is called once per frame
@@ -20,18 +29,17 @@ public class Result : MonoBehaviour
         
     }
 
+    public void RetryStage()
+    {
+        //‰æ–Ê‘JˆÚ
+        Initiate.DoneFading();
+        Initiate.Fade("Stage"+stageCullent, Color.white, 1.0f);
+    }
+
     public void StageSelect()
     {
         //‰æ–Ê‘JˆÚ
         Initiate.DoneFading();
         Initiate.Fade("StageSelect", Color.white, 1.0f);
-    }
-
-    public void SetScore(int stageNum,int scoreNum)
-    {
-        stage.text = stageNum.ToString();
-
-        score.text = scoreNum.ToString();
-
     }
 }
