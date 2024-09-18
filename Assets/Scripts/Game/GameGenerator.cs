@@ -71,6 +71,7 @@ public class GameGenerator : MonoBehaviour
         //リザルトを取得
         result = GetComponent<Result>();
 
+
         //AudioComponentを取得
         audioSource = GetComponent<AudioSource>();
 
@@ -97,7 +98,7 @@ public class GameGenerator : MonoBehaviour
         }
         // ゲームタイマー更新
         gameTimer -= Time.deltaTime;
-        textGameTimer.text = "" + (int)gameTimer;
+        textGameTimer.text = "Time" + (int)gameTimer;
 
         if(juelRequired<=0)
         {
@@ -169,7 +170,7 @@ public class GameGenerator : MonoBehaviour
     public void AddScore(int score)
     {
         gameScore += score;
-        textGameScore.text = gameScore.ToString();
+        textGameScore.text = "Score:"+gameScore.ToString();
     }
 
     //クリア条件を達成させる
@@ -215,6 +216,11 @@ public class GameGenerator : MonoBehaviour
         gameoverPanel.SetActive(true);
         isgameOver = true;
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
+        
+        if(playerNum==2)
+        {
+            GameObject.Find("Player2").GetComponent<ObjCtrl>().GameModeChange();
+        }
         Time.timeScale = 0;
     }
 
@@ -227,6 +233,10 @@ public class GameGenerator : MonoBehaviour
         AddScore((int)Math.Ceiling(gameTimer)*30);
         isgameClear = true;
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
+        if (playerNum == 2)
+        {
+            GameObject.Find("Player2").GetComponent<ObjCtrl>().GameModeChange();
+        }
         Time.timeScale = 0;
 
         Result();
