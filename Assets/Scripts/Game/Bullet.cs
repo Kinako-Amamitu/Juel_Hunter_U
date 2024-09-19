@@ -1,7 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 using DG.Tweening;
-using System.Collections.Generic;
 
 /// <summary>
 /// 弾のプレハブにアタッチする制御用クラス
@@ -16,7 +20,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] GameObject juel; //判定に使う用のジュエル
     [SerializeField] GameGenerator gameGenerator;
     //PlayerController playerController;
-   
+
+    
 
     int layerMask = 1 << 7;
     
@@ -128,6 +133,7 @@ public class Bullet : MonoBehaviour
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
 
+                           
                             gameGenerator.Quest(3);
                             gameGenerator.AddScore(100);
                         }
@@ -165,6 +171,7 @@ public class Bullet : MonoBehaviour
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
 
+                        
                             gameGenerator.Quest(3);
                             gameGenerator.AddScore(100);
                         }
@@ -202,6 +209,7 @@ public class Bullet : MonoBehaviour
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
 
+                           
                             gameGenerator.Quest(3);
                             gameGenerator.AddScore(100);
                         }
@@ -239,6 +247,7 @@ public class Bullet : MonoBehaviour
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
 
+                          
                             gameGenerator.Quest(3);
                             gameGenerator.AddScore(100);
                         }
@@ -277,6 +286,7 @@ public class Bullet : MonoBehaviour
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
 
+                            
                             gameGenerator.Quest(3);
                             gameGenerator.AddScore(100);
                         }

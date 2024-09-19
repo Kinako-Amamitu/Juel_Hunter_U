@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class Title : MonoBehaviour
 {
+
+    public AudioClip start; //ゲームスタート音
+    AudioSource audioSource; //SE入力にオーディオソースを使用する
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //AudioComponentを取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -28,6 +33,7 @@ public class Title : MonoBehaviour
 
     public void GameStart()
     {
+        audioSource.PlayOneShot(start);
         bool isSuccess = NetworkManager.Instance.LoadUserData();
         if (!isSuccess)
         {

@@ -1525,6 +1525,7 @@ MonoBehaviour:
   - {fileID: 26321859}
   - {fileID: 437759019}
   - {fileID: 137577180}
+  stageEnter: {fileID: 8300000, guid: e3e8abb61110a6e4cbc25e0fef118555, type: 3}
 --- !u!4 &741787135
 Transform:
   m_ObjectHideFlags: 0
@@ -2084,10 +2085,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.00024986267
-    width: 1
-    height: 0.9995003
+    x: 0.125
+    y: 0
+    width: 0.75
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

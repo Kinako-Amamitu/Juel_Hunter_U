@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] string playerTag;
     [SerializeField] int playerNum;
 
-
+   public bool isplayerMode = false;
     
 
 
@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if(isplayerMode==true)
+        {
+            return;
+        }
         /* マウスクリックを検知 */
         if (Input.GetMouseButtonDown(0))
         {

@@ -5,10 +5,19 @@ using UnityEngine;
 public class StageGenelater : MonoBehaviour
 {
     [SerializeField] GameObject[] stageList;
+
+    //se
+    public AudioClip stageEnter;
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        for(int i=0;i<NetworkManager.Instance.stageCullentClear;i++)
+
+        //AudioComponent‚ðŽæ“¾
+        audioSource = GetComponent<AudioSource>();
+
+        for (int i=0;i<NetworkManager.Instance.stageCullentClear;i++)
         {
             stageList[i].SetActive(true);
         }
@@ -22,6 +31,7 @@ public class StageGenelater : MonoBehaviour
 
     public void StageSelector(int stageNum)
     {
+        audioSource.PlayOneShot(stageEnter);
         GameGenerator.UpdateStageScene(stageNum);
     }
 }

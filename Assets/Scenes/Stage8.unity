@@ -1136,6 +1136,7 @@ MonoBehaviour:
   posemenuPanel: {fileID: 1262502309}
   gameoverPanel: {fileID: 1248612805}
   sound1: {fileID: 8300000, guid: 4def28eca43a074459fe3e9618c78c81, type: 3}
+  sound2: {fileID: 8300000, guid: 12931ad9da0ed69479698296f0280bef, type: 3}
   gameOver: {fileID: 8300000, guid: af0d56af418ffb5459263644e40d22b9, type: 3}
   gameClear: {fileID: 8300000, guid: 9892d88302b2e5545888c6e0076667f9, type: 3}
   pageUp: {fileID: 8300000, guid: 7982e86c2639e6f47b359f5ea014efbf, type: 3}
@@ -5790,9 +5791,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.125
     y: 0
-    width: 1
+    width: 0.75
     height: 1
   near clip plane: 0.3
   far clip plane: 1000

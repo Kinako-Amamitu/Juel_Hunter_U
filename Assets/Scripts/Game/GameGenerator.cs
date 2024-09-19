@@ -51,6 +51,7 @@ public class GameGenerator : MonoBehaviour
 
     //SE
     public AudioClip sound1; //発射音
+    public AudioClip sound2; //ジュエル削除音
     public AudioClip gameOver; //ゲームオーバー時
     public AudioClip gameClear; //ゲームクリア時
     public AudioClip pageUp; //メニューを開く
@@ -176,6 +177,7 @@ public class GameGenerator : MonoBehaviour
     //クリア条件を達成させる
     public void Quest(int target)
     {
+        audioSource.PlayOneShot(sound2);
         juelRequired -= target;
         target1.text = juelRequired.ToString();
     }
@@ -187,6 +189,11 @@ public class GameGenerator : MonoBehaviour
     {
         audioSource.PlayOneShot(pageUp);
         Time.timeScale = 0;
+        for (int i = 0; i < playerNum; i++)
+        {
+            playerController[i].isplayerMode = true;
+        }
+            
         posemenuPanel.SetActive(true);
     }
 
