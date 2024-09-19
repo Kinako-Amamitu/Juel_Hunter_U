@@ -41,10 +41,10 @@ public class GameGenerator : MonoBehaviour
 
 
     // UI
-    [SerializeField] TextMeshProUGUI textGameScore;
-    [SerializeField] TextMeshProUGUI textGameTimer;
-    [SerializeField] TextMeshProUGUI stageclearText;
-    [SerializeField] TextMeshProUGUI gameoverText;
+    [SerializeField] Text textGameScore;
+    [SerializeField] Text textGameTimer;
+    [SerializeField] Text stageclearText;
+    [SerializeField] Text gameoverText;
     [SerializeField] Text target1;
     [SerializeField] GameObject posemenuPanel;
     [SerializeField] GameObject gameoverPanel;
@@ -64,6 +64,8 @@ public class GameGenerator : MonoBehaviour
 
     private void Start()
     {
+     
+
         //オブジェクトクラスを取得
         obj = GetComponent<ObjCtrl>();
 
@@ -99,7 +101,7 @@ public class GameGenerator : MonoBehaviour
         }
         // ゲームタイマー更新
         gameTimer -= Time.deltaTime;
-        textGameTimer.text = "Time" + (int)gameTimer;
+        textGameTimer.text = "Time:" + (int)gameTimer;
 
         if(juelRequired<=0)
         {
@@ -193,7 +195,13 @@ public class GameGenerator : MonoBehaviour
         {
             playerController[i].isplayerMode = true;
         }
-            
+
+        GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
+
+        if (playerNum == 2)
+        {
+            GameObject.Find("Player2").GetComponent<ObjCtrl>().GameModeChange();
+        }
         posemenuPanel.SetActive(true);
     }
 
@@ -202,6 +210,16 @@ public class GameGenerator : MonoBehaviour
     {
         posemenuPanel.SetActive(false);
         Time.timeScale = 1;
+        for (int i = 0; i < playerNum; i++)
+        {
+            playerController[i].isplayerMode = false;
+        }
+        GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
+
+        if (playerNum == 2)
+        {
+            GameObject.Find("Player2").GetComponent<ObjCtrl>().GameModeChange();
+        }
         audioSource.PlayOneShot(pageDown);
     }
 
@@ -218,7 +236,7 @@ public class GameGenerator : MonoBehaviour
     //ゲームオーバーを判定する
     public void GameOver()
     {
-        gameoverText.SetText("GameOver!!");
+        gameoverText.text="GameOver!!";
         audioSource.PlayOneShot(gameOver);
         gameoverPanel.SetActive(true);
         isgameOver = true;
@@ -236,7 +254,7 @@ public class GameGenerator : MonoBehaviour
     {
         NetworkManager.Instance.StageProgress(currentStage);
         audioSource.PlayOneShot(gameClear);
-        stageclearText.SetText("StageClear!!");
+        stageclearText.text="StageClear!!";
         AddScore((int)Math.Ceiling(gameTimer)*30);
         isgameClear = true;
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();

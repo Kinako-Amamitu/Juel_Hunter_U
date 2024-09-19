@@ -14,8 +14,6 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float bulletSpeed;　// 弾の速度
     [SerializeField] private float destroyTime;　// 弾の生存期間
-    [SerializeField] TextMeshProUGUI gameoverText; //ゲームオーバーのテキスト
-    [SerializeField] TextMeshProUGUI gamescoreText; //得点のテキスト
     [SerializeField] GameObject over; //レイ設定用オブジェクト
     [SerializeField] GameObject juel; //判定に使う用のジュエル
     [SerializeField] GameGenerator gameGenerator;
@@ -30,7 +28,7 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
        
-        gameoverText=GameObject.Find("gameoverText").GetComponent<TextMeshProUGUI>();
+       
         gameGenerator = GameObject.Find("GameGenerator").GetComponent<GameGenerator>();
         GetComponent<ObjCtrl>();
     }

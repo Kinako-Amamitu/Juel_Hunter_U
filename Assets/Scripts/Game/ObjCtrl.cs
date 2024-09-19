@@ -65,6 +65,13 @@ public class ObjCtrl : MonoBehaviour
 
     public void GameModeChange()
     {
-        isgameMode = true;
+        if(isgameMode==false)
+        {
+            isgameMode = true;
+        }
+        else if (isgameMode == true)
+        {
+            isgameMode = false;
+        }
     }
 }
