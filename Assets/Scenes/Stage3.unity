@@ -1495,7 +1495,7 @@ MonoBehaviour:
   - {fileID: 9149540444684222356, guid: bdb1840ce6ffff14e9ae8bafa2285e2d, type: 3}
   - {fileID: 9169416433727246376, guid: 8c61aa8a906b80543b98ccaaa54ec89f, type: 3}
   outZone: {fileID: 562567609}
-  gameTimer: 120
+  gameTimer: 90
   juelRequired: 9
   playerNum: 1
   deleteCount: 3
@@ -1680,6 +1680,14 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7277889957194460187, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7277889957194460187, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7277889957194460187, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1709,11 +1717,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7277889957194460187, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7277889957194460187, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7277889957194460187, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

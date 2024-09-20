@@ -2316,11 +2316,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 963725216701181492, guid: 4f0a808573c4e9943b8343d6257f3916, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 963725216701181492, guid: 4f0a808573c4e9943b8343d6257f3916, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 963725216701181492, guid: 4f0a808573c4e9943b8343d6257f3916, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2352,11 +2352,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 963725216701181492, guid: 4f0a808573c4e9943b8343d6257f3916, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.53
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 963725216701181492, guid: 4f0a808573c4e9943b8343d6257f3916, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.63
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 963725216701181492, guid: 4f0a808573c4e9943b8343d6257f3916, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5348,9 +5348,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.08949098
     width: 1
-    height: 1
+    height: 0.82101804
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

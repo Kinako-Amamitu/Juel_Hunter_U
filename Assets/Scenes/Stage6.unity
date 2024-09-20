@@ -1518,7 +1518,7 @@ MonoBehaviour:
   - {fileID: 4162968277313547898, guid: 5074c88c844655e47bcf3c3846f10c05, type: 3}
   - {fileID: 9149540444684222356, guid: bdb1840ce6ffff14e9ae8bafa2285e2d, type: 3}
   outZone: {fileID: 936222432}
-  gameTimer: 250
+  gameTimer: 120
   juelRequired: 21
   playerNum: 1
   deleteCount: 3
@@ -2522,6 +2522,14 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3569819784922259495, guid: 4d8fbf01f6a9ca84da9dfeac3be47e3c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569819784922259495, guid: 4d8fbf01f6a9ca84da9dfeac3be47e3c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3569819784922259495, guid: 4d8fbf01f6a9ca84da9dfeac3be47e3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2551,11 +2559,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3569819784922259495, guid: 4d8fbf01f6a9ca84da9dfeac3be47e3c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.11
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 3569819784922259495, guid: 4d8fbf01f6a9ca84da9dfeac3be47e3c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.78
+      value: -0.77
       objectReference: {fileID: 0}
     - target: {fileID: 3569819784922259495, guid: 4d8fbf01f6a9ca84da9dfeac3be47e3c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3984,9 +3992,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.08949098
     width: 1
-    height: 1
+    height: 0.82101804
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
