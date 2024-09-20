@@ -298,6 +298,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuButton (Legacy)
       objectReference: {fileID: 0}
+    - target: {fileID: 4651056047390723349, guid: 7063e9935ca685b458b959f84b1062e1, type: 3}
+      propertyPath: m_Text
+      value: MENU
+      objectReference: {fileID: 0}
     - target: {fileID: 5475631242261896653, guid: 7063e9935ca685b458b959f84b1062e1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1826,9 +1830,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.08949098
     width: 1
-    height: 1
+    height: 0.82101804
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

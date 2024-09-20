@@ -236,7 +236,14 @@ public class GameGenerator : MonoBehaviour
     //ゲームオーバーを判定する
     public void GameOver()
     {
-        gameoverText.text="GameOver!!";
+        if(currentStage==7||currentStage==8)
+        {
+            gameoverText.text = "任務失敗!!";
+        }
+        else
+        {
+            gameoverText.text = "GameOver!!";
+        }
         audioSource.PlayOneShot(gameOver);
         gameoverPanel.SetActive(true);
         isgameOver = true;

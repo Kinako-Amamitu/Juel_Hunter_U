@@ -22,6 +22,7 @@ TagManager:
   - Enemy_Hole
   - Enemy
   - Player2
+  - PlayOut
   layers:
   - Default
   - TransparentFX
