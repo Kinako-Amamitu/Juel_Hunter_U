@@ -12,10 +12,10 @@ public class NetworkManager : MonoBehaviour
     private static NetworkManager instance;
 
     const string API_BASE_URL = "https://api-juelhunter.japaneast.cloudapp.azure.com/api/";
-    private int userID = 0;  //©•ª‚Ìƒ†[ƒU[ID
-    private string userName = ""; //©•ª‚Ìƒ†[ƒU[–¼
+    private int userID = 0;  //è‡ªåˆ†ã®ãƒ¦ãƒ¼ã‚¶ãƒ¼ID
+    private string userName = ""; //è‡ªåˆ†ã®ãƒ¦ãƒ¼ã‚¶ãƒ¼å
 
-    private int stageClearNumber=0; //ƒXƒe[ƒWƒNƒŠƒAó‹µ
+    private int stageClearNumber=0; //ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒªã‚¢çŠ¶æ³
 
     public int stageCullentClear
     {
@@ -36,17 +36,17 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-    //ƒ†[ƒU[“o˜^ˆ—
+    //ãƒ¦ãƒ¼ã‚¶ãƒ¼ç™»éŒ²å‡¦ç†
     public IEnumerator RegistUser(string name, Action<bool> result)
     {
-        //ƒT[ƒo[‚É‘—M‚·‚éƒIƒuƒWƒFƒNƒg‚ğì¬
+        //ã‚µãƒ¼ãƒãƒ¼ã«é€ä¿¡ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆ
         RegistUserRequest request_data = new RegistUserRequest();
         request_data.Name = name;
 
-        //ƒT[ƒo[‚É‘—M‚·‚éƒIƒuƒWƒFƒNƒg‚ğJSON‚É•ÏŠ·
+        //ã‚µãƒ¼ãƒãƒ¼ã«é€ä¿¡ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’JSONã«å¤‰æ›
         string json = JsonConvert.SerializeObject(request_data);
 
-        //‘—M
+        //é€ä¿¡
         UnityWebRequest request = UnityWebRequest.Post(
             API_BASE_URL + "users/store", json, "application/json");
 
@@ -54,20 +54,20 @@ public class NetworkManager : MonoBehaviour
         bool isSuccess = false;
         if(request.result==UnityWebRequest.Result.Success&& request.responseCode == 200)
         {
-            //’ÊM‚ª¬Œ÷‚µ‚½‚Æ‚«A•Ô‚Á‚Ä‚«‚½JSON‚ğƒIƒuƒWƒFƒNƒg‚É•ÏŠ·
+            //é€šä¿¡ãŒæˆåŠŸã—ãŸã¨ãã€è¿”ã£ã¦ããŸJSONã‚’ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¤‰æ›
             string resultJson = request.downloadHandler.text;
             RegistUserResponse response = JsonConvert.DeserializeObject<RegistUserResponse>(resultJson);
 
-            //ƒtƒ@ƒCƒ‹‚Éƒ†[ƒU[ID‚ğ•Û‘¶
+            //ãƒ•ã‚¡ã‚¤ãƒ«ã«ãƒ¦ãƒ¼ã‚¶ãƒ¼IDã‚’ä¿å­˜
             this.userName = name;
             this.userID = response.UserID;
             SaveUserData();
             isSuccess = true;
         }
-        result?.Invoke(isSuccess); //‚±‚±‚ÅŒÄ‚Ño‚µŒ³‚Ìresultˆ—‚ğŒÄ‚Ño‚·
+        result?.Invoke(isSuccess); //ã“ã“ã§å‘¼ã³å‡ºã—å…ƒã®resultå‡¦ç†ã‚’å‘¼ã³å‡ºã™
     }
 
-    //ƒ†[ƒU[î•ñ‚ğ•Û‘¶‚·‚é
+    //ãƒ¦ãƒ¼ã‚¶ãƒ¼æƒ…å ±ã‚’ä¿å­˜ã™ã‚‹
     private void SaveUserData()
     {
         SaveData saveData = new SaveData();

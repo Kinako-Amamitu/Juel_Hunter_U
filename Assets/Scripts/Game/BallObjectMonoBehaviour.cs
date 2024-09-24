@@ -10,10 +10,10 @@ public class BallObject : MonoBehaviour
     [SerializeField]
     public bool isTouch = false;
 
-    public float MoveSpeed = 20.0f;         // ˆÚ“®’l
+    public float MoveSpeed = 20.0f;         // ç§»å‹•å€¤
 
-    int frameCount = 0;             // ƒtƒŒ[ƒ€ƒJƒEƒ“ƒg
-    const int deleteFrame = 180;    // íœƒtƒŒ[ƒ€
+    int frameCount = 0;             // ãƒ•ãƒ¬ãƒ¼ãƒ ã‚«ã‚¦ãƒ³ãƒˆ
+    const int deleteFrame = 180;    // å‰Šé™¤ãƒ•ãƒ¬ãƒ¼ãƒ 
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +24,10 @@ public class BallObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // ˆÊ’u‚ÌXV
+        // ä½ç½®ã®æ›´æ–°
         transform.Translate(MoveSpeed * Time.deltaTime, 0, 0);
 
-        // ˆê’èƒtƒŒ[ƒ€‚ÅÁ‚·
+        // ä¸€å®šãƒ•ãƒ¬ãƒ¼ãƒ ã§æ¶ˆã™
         //if (++frameCount > deleteFrame)
         //{
         //    Destroy(gameObject);
@@ -37,15 +37,15 @@ public class BallObject : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        //ƒ{[ƒ‹‚É‚Ô‚Â‚©‚Á‚½‚Æ‚«
+        //ãƒœãƒ¼ãƒ«ã«ã¶ã¤ã‹ã£ãŸã¨ã
         if (other.gameObject.tag == "Ball")
         {
-            Debug.Log("ƒ{[ƒ‹‚É‚Ô‚Â‚©‚Á‚½I");
+            Debug.Log("ãƒœãƒ¼ãƒ«ã«ã¶ã¤ã‹ã£ãŸï¼");
             Destroy(gameObject);
         }
         else
         {
-            Debug.Log("ƒ{[ƒ‹‚¶‚á‚È‚¢‚Æ‚±‚ë‚É‚Ô‚Â‚©‚Á‚½I");
+            Debug.Log("ãƒœãƒ¼ãƒ«ã˜ã‚ƒãªã„ã¨ã“ã‚ã«ã¶ã¤ã‹ã£ãŸï¼");
         }
        
     }

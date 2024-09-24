@@ -18,16 +18,16 @@ public class AssetLoader : MonoBehaviour
 
     IEnumerator loading()
     {
-        //ƒJƒ^ƒƒOXVˆ—
+        //ã‚«ã‚¿ãƒ­ã‚°æ›´æ–°å‡¦ç†
         var handle = Addressables.UpdateCatalogs();
 
         yield return handle;
 
-        //ƒ_ƒEƒ“ƒ[ƒhÀs
+        //ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å®Ÿè¡Œ
         AsyncOperationHandle downloadHandle =
             Addressables.DownloadDependenciesAsync("default", false);
 
-        //ƒ_ƒEƒ“ƒ[ƒhŠ®—¹‚·‚é‚Ü‚ÅƒXƒ‰ƒCƒ_[‚ÌUI‚ğXV
+        //ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰å®Œäº†ã™ã‚‹ã¾ã§ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã®UIã‚’æ›´æ–°
         while(downloadHandle.Status==AsyncOperationStatus.None)
         {
             loadingSlider.value = downloadHandle.GetDownloadStatus().Percent * 100;
@@ -37,7 +37,7 @@ public class AssetLoader : MonoBehaviour
         Addressables.Release(downloadHandle);
         Addressables.Release(handle);
 
-        //Ÿ‚ÌƒV[ƒ“‚ÉˆÚ“®
+        //æ¬¡ã®ã‚·ãƒ¼ãƒ³ã«ç§»å‹•
         Initiate.DoneFading();
         Initiate.Fade("StageSelect", Color.black, 0.5f);
     }

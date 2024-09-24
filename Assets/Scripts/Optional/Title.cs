@@ -6,20 +6,20 @@ using UnityEngine;
 public class Title : MonoBehaviour
 {
 
-    public AudioClip start; //ƒQ[ƒ€ƒXƒ^[ƒg‰¹
-    AudioSource audioSource; //SE“ü—Í‚ÉƒI[ƒfƒBƒIƒ\[ƒX‚ğg—p‚·‚é
+    public AudioClip start; //ã‚²ãƒ¼ãƒ ã‚¹ã‚¿ãƒ¼ãƒˆéŸ³
+    AudioSource audioSource; //SEå…¥åŠ›ã«ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚’ä½¿ç”¨ã™ã‚‹
 
     // Start is called before the first frame update
     void Start()
     {
-        //AudioComponent‚ğæ“¾
+        //AudioComponentã‚’å–å¾—
         audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //ƒ^ƒbƒ`‚µ‚½‚Æ‚«
+        //ã‚¿ãƒƒãƒã—ãŸã¨ã
         /*if (Input.touchCount > 0)
         {
             Touch t1 = Input.GetTouch(0);
@@ -37,16 +37,16 @@ public class Title : MonoBehaviour
         bool isSuccess = NetworkManager.Instance.LoadUserData();
         if (!isSuccess)
         {
-            //ƒ†[ƒU[ƒf[ƒ^‚ª•Û‘¶‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í“o˜^
+            //ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ‡ãƒ¼ã‚¿ãŒä¿å­˜ã•ã‚Œã¦ã„ãªã„å ´åˆã¯ç™»éŒ²
             StartCoroutine(NetworkManager.Instance.RegistUser(Guid.NewGuid().ToString(), result => {
-                //‰æ–Ê‘JˆÚ
+                //ç”»é¢é·ç§»
                 Initiate.DoneFading();
                 Initiate.Fade("StageSelect", Color.black, 0.5f);
             }));
         }
         else
         {
-            //‰æ–Ê‘JˆÚ
+            //ç”»é¢é·ç§»
             Initiate.DoneFading();
             Initiate.Fade("StageSelect", Color.black, 0.5f);
         };

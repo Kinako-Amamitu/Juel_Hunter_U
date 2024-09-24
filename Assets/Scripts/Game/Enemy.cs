@@ -7,14 +7,14 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] Vector2 velocity;
 
-    public AudioClip ninja; //€–S‰¹
-    AudioSource audioSource; //SE“ü—Í‚ÉƒI[ƒfƒBƒIƒ\[ƒX‚ğg—p‚·‚é
+    public AudioClip ninja; //æ­»äº¡éŸ³
+    AudioSource audioSource; //SEå…¥åŠ›ã«ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚’ä½¿ç”¨ã™ã‚‹
 
     private void Start()
     {
         GetComponent<Rigidbody2D>().velocity = velocity;
 
-        //AudioComponent‚ğæ“¾
+        //AudioComponentã‚’å–å¾—
         audioSource = GetComponent<AudioSource>();
     }
     private void OnTriggerEnter2D(Collider2D collision)

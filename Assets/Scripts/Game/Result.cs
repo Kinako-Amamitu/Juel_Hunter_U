@@ -10,9 +10,9 @@ public class Result : MonoBehaviour
     [SerializeField] Text scoreText;
 
     //se
-    public AudioClip retry; //”Ä—pŒˆ’è‰¹
-    public AudioClip stageSelect; //”Ä—pƒLƒƒƒ“ƒZƒ‹‰¹
-    AudioSource audioSource; //SE“ü—Í‚ÉƒI[ƒfƒBƒIƒ\[ƒX‚ğg—p‚·‚é
+    public AudioClip retry; //æ±ç”¨æ±ºå®šéŸ³
+    public AudioClip stageSelect; //æ±ç”¨ã‚­ãƒ£ãƒ³ã‚»ãƒ«éŸ³
+    AudioSource audioSource; //SEå…¥åŠ›ã«ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚’ä½¿ç”¨ã™ã‚‹
 
 
     int stageCullent;
@@ -22,7 +22,7 @@ public class Result : MonoBehaviour
     {
         stageCullent = GameGenerator.Stageset();
 
-        //AudioComponent‚ğæ“¾
+        //AudioComponentã‚’å–å¾—
         audioSource = GetComponent<AudioSource>();
 
         stage.text = string.Format("STAGE {0}", stageCullent);
@@ -41,7 +41,7 @@ public class Result : MonoBehaviour
     public void RetryStage()
     {
         audioSource.PlayOneShot(retry);
-        //‰æ–Ê‘JˆÚ
+        //ç”»é¢é·ç§»
         Initiate.DoneFading();
         Initiate.Fade("Stage"+stageCullent, Color.white, 1.0f);
     }
@@ -49,7 +49,7 @@ public class Result : MonoBehaviour
     public void StageSelect()
     {
         audioSource.PlayOneShot(stageSelect);
-        //‰æ–Ê‘JˆÚ
+        //ç”»é¢é·ç§»
         Initiate.DoneFading();
         Initiate.Fade("StageSelect", Color.white, 1.0f);
 

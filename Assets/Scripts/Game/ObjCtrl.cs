@@ -7,14 +7,14 @@ public class ObjCtrl : MonoBehaviour
 
     GameGenerator gameGenerator;
 
-    //‰ñ“]—p
-    Vector2 sPos;   //ƒ^ƒbƒ`‚µ‚½À•W
-    Quaternion sRot;//ƒ^ƒbƒ`‚µ‚½‚Æ‚«‚Ì‰ñ“]
-    float wid, hei, diag;  //ƒXƒNƒŠ[ƒ“ƒTƒCƒY
-    float tx, ty;    //•Ï”
+    //å›žè»¢ç”¨
+    Vector2 sPos;   //ã‚¿ãƒƒãƒã—ãŸåº§æ¨™
+    Quaternion sRot;//ã‚¿ãƒƒãƒã—ãŸã¨ãã®å›žè»¢
+    float wid, hei, diag;  //ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚µã‚¤ã‚º
+    float tx, ty;    //å¤‰æ•°
 
-    public bool isgameMode = false; //ƒQ[ƒ€‚Ìó‘Ô
-    public bool isrotate = false; //‰ñ“]‚Ìó‘Ô
+    public bool isgameMode = false; //ã‚²ãƒ¼ãƒ ã®çŠ¶æ…‹
+    public bool isrotate = false; //å›žè»¢ã®çŠ¶æ…‹
 
     void Start()
     {
@@ -42,7 +42,7 @@ public class ObjCtrl : MonoBehaviour
         if (Input.touchCount > 0)
         {
             
-            //‰ñ“]
+            //å›žè»¢
             Touch t1 = Input.GetTouch(0);
 
            
@@ -54,8 +54,8 @@ public class ObjCtrl : MonoBehaviour
             }
             else if (t1.phase == TouchPhase.Moved || t1.phase == TouchPhase.Stationary)
             {
-                tx = (t1.position.x - sPos.x) / wid; //‰¡ˆÚ“®—Ê(-1<tx<1)
-                ty = (t1.position.y - sPos.y) / hei; //cˆÚ“®—Ê(-1<ty<1)
+                tx = (t1.position.x - sPos.x) / wid; //æ¨ªç§»å‹•é‡(-1<tx<1)
+                ty = (t1.position.y - sPos.y) / hei; //ç¸¦ç§»å‹•é‡(-1<ty<1)
                 obj.transform.rotation = sRot;
                 obj.transform.Rotate(new Vector3(0, 0, -90 * tx), Space.World);
             }

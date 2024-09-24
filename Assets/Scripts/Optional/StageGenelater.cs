@@ -14,7 +14,7 @@ public class StageGenelater : MonoBehaviour
     void Start()
     {
 
-        //AudioComponent‚ğæ“¾
+        //AudioComponentã‚’å–å¾—
         audioSource = GetComponent<AudioSource>();
 
         for (int i=0;i<NetworkManager.Instance.stageCullentClear;i++)

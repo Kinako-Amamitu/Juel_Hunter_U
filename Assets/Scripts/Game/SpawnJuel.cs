@@ -23,14 +23,14 @@ public class SpawnJuel : MonoBehaviour
 
         if (!hitObj)
         {
-            // 色ランダム
+            // 濶ｲ繝ｩ繝ｳ繝繝
             int rnd = Random.Range(0, juelPrefabs.Count);
 
             while (true)
             {
                 if (rnd1 == rnd2 && rnd == rnd1)
                 {
-                    // 色ランダム
+                    // 濶ｲ繝ｩ繝ｳ繝繝
                     rnd = Random.Range(0, juelPrefabs.Count);
                 }
                 else
@@ -42,7 +42,7 @@ public class SpawnJuel : MonoBehaviour
             rnd1 = rnd;
 
 
-            // 弾の生成
+            // 蠑ｾ縺ｮ逕滓��
             Instantiate(juelPrefabs[rnd], transform.position+Vector3.right*0.005f, Quaternion.identity);
         }
     }

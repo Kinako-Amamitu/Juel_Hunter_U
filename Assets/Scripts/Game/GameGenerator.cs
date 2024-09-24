@@ -8,31 +8,31 @@ using System;
 
 public class GameGenerator : MonoBehaviour
 {
-    [SerializeField] List<Bullet> bulletPrefab;     // ’e‚ÌƒvƒŒƒtƒ@ƒu
-    [SerializeField] private Transform[] firePoint;     // ”­Ëƒ|ƒCƒ“ƒg
-    //[SerializeField] private float fireRate = 2.0f;   // ”­ËŠÔŠu(•b)
-    [SerializeField] private PlayerController[] playerController;      // PlayerController‚Ö‚ÌQÆ
-    [SerializeField] List<GameObject> juelPrefabs; //”»’è‚Ég‚¤—p‚ÌƒWƒ…ƒGƒ‹ƒvƒŒƒnƒu
-    [SerializeField] private Transform outZone; //ƒQ[ƒ€ƒI[ƒo[”»’èˆÊ’u
-    [SerializeField] float gameTimer; //ƒQ[ƒ€ŠÔ
-    [SerializeField]int juelRequired; //ğŒŒÂ”
-    [SerializeField] int playerNum; //ƒvƒŒƒCƒ„[”
+    [SerializeField] List<Bullet> bulletPrefab;     // å¼¾ã®ãƒ—ãƒ¬ãƒ•ã‚¡ãƒ–
+    [SerializeField] private Transform[] firePoint;     // ç™ºå°„ãƒã‚¤ãƒ³ãƒˆ
+    //[SerializeField] private float fireRate = 2.0f;   // ç™ºå°„é–“éš”(ç§’)
+    [SerializeField] private PlayerController[] playerController;      // PlayerControllerã¸ã®å‚ç…§
+    [SerializeField] List<GameObject> juelPrefabs; //åˆ¤å®šã«ä½¿ã†ç”¨ã®ã‚¸ãƒ¥ã‚¨ãƒ«ãƒ—ãƒ¬ãƒãƒ–
+    [SerializeField] private Transform outZone; //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼åˆ¤å®šä½ç½®
+    [SerializeField] float gameTimer; //ã‚²ãƒ¼ãƒ æ™‚é–“
+    [SerializeField]int juelRequired; //æ¡ä»¶å€‹æ•°
+    [SerializeField] int playerNum; //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ•°
 
-    // íœ‚Å‚«‚éƒAƒCƒeƒ€”
+    // å‰Šé™¤ã§ãã‚‹ã‚¢ã‚¤ãƒ†ãƒ æ•°
     [SerializeField] int deleteCount;
 
-    //ƒIƒuƒWƒFƒNƒgŠÖ”‚Ö‚Ì
+    //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–¢æ•°ã¸ã®
     ObjCtrl obj;
 
-    //ƒXƒRƒA
+    //ã‚¹ã‚³ã‚¢
     public static int gameScore;
 
-    //ƒV[ƒ“‚Ì”»’è•Ï”
+    //ã‚·ãƒ¼ãƒ³ã®åˆ¤å®šå¤‰æ•°
     public static int currentStage;
 
     
 
-    //ƒQ[ƒ€‚Ì”»’è
+    //ã‚²ãƒ¼ãƒ ã®åˆ¤å®š
     public bool isgameOver=false;
     public bool isgameClear = false;
 
@@ -50,38 +50,38 @@ public class GameGenerator : MonoBehaviour
     [SerializeField] GameObject gameoverPanel;
 
     //SE
-    public AudioClip sound1; //”­Ë‰¹
-    public AudioClip sound2; //ƒWƒ…ƒGƒ‹íœ‰¹
-    public AudioClip gameOver; //ƒQ[ƒ€ƒI[ƒo[
-    public AudioClip gameClear; //ƒQ[ƒ€ƒNƒŠƒA
-    public AudioClip pageUp; //ƒƒjƒ…[‚ğŠJ‚­
-    public AudioClip pageDown; //ƒƒjƒ…[‚ğ•Â‚¶‚é
-    public AudioClip select; //”Ä—pŒˆ’è‰¹
-    public AudioClip cancel; //”Ä—pƒLƒƒƒ“ƒZƒ‹‰¹
-    AudioSource audioSource; //SE“ü—Í‚ÉƒI[ƒfƒBƒIƒ\[ƒX‚ğg—p‚·‚é
+    public AudioClip sound1; //ç™ºå°„éŸ³
+    public AudioClip sound2; //ã‚¸ãƒ¥ã‚¨ãƒ«å‰Šé™¤éŸ³
+    public AudioClip gameOver; //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚
+    public AudioClip gameClear; //ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢æ™‚
+    public AudioClip pageUp; //ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‹ã
+    public AudioClip pageDown; //ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‰ã˜ã‚‹
+    public AudioClip select; //æ±ç”¨æ±ºå®šéŸ³
+    public AudioClip cancel; //æ±ç”¨ã‚­ãƒ£ãƒ³ã‚»ãƒ«éŸ³
+    AudioSource audioSource; //SEå…¥åŠ›ã«ã‚ªãƒ¼ãƒ‡ã‚£ã‚ªã‚½ãƒ¼ã‚¹ã‚’ä½¿ç”¨ã™ã‚‹
 
-    //private float timer = 0f;       // ƒ^ƒCƒ}[
+    //private float timer = 0f;       // ã‚¿ã‚¤ãƒãƒ¼
 
     private void Start()
     {
      
 
-        //ƒIƒuƒWƒFƒNƒgƒNƒ‰ƒX‚ğæ“¾
+        //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚¯ãƒ©ã‚¹ã‚’å–å¾—
         obj = GetComponent<ObjCtrl>();
 
         bullet = new Bullet[playerNum];
 
-        //ƒŠƒUƒ‹ƒg‚ğæ“¾
+        //ãƒªã‚¶ãƒ«ãƒˆã‚’å–å¾—
         result = GetComponent<Result>();
 
 
-        //AudioComponent‚ğæ“¾
+        //AudioComponentã‚’å–å¾—
         audioSource = GetComponent<AudioSource>();
 
-        //ƒNƒŠƒAğŒ‰Šú‰»
+        //ã‚¯ãƒªã‚¢æ¡ä»¶åˆæœŸåŒ–
         target1.text = juelRequired.ToString();
 
-        //‰’e‚ÌƒWƒ…ƒGƒ‹‚ğ’Š‘I
+        //åˆå¼¾ã®ã‚¸ãƒ¥ã‚¨ãƒ«ã‚’æŠ½é¸
         for(int i=0;i<playerNum;i++)
         {
             StartCoroutine(UpdateBullet(i));
@@ -99,18 +99,18 @@ public class GameGenerator : MonoBehaviour
         {
             return;
         }
-        // ƒQ[ƒ€ƒ^ƒCƒ}[XV
+        // ã‚²ãƒ¼ãƒ ã‚¿ã‚¤ãƒãƒ¼æ›´æ–°
         gameTimer -= Time.deltaTime;
         textGameTimer.text = "Time:" + (int)gameTimer;
 
         if(juelRequired<=0)
         {
-            target1.text ="OKII" ;
+            target1.text ="OKï¼ï¼" ;
 
             GameClear();
         }
 
-        //ƒQ[ƒ€I—¹
+        //ã‚²ãƒ¼ãƒ çµ‚äº†
         if (gameTimer <= 0)
         {
             
@@ -118,10 +118,10 @@ public class GameGenerator : MonoBehaviour
 
             GameOver();
 
-            // Update‚É“ü‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+            // Updateã«å…¥ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
             enabled = false;
           
-;            // ‚±‚Ì“_‚ÅUpdate‚©‚ç”²‚¯‚é
+;            // ã“ã®æ™‚ç‚¹ã§Updateã‹ã‚‰æŠœã‘ã‚‹
             return;
         }
 
@@ -135,7 +135,7 @@ public class GameGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// ’e‚Ì¶¬
+    /// å¼¾ã®ç”Ÿæˆ
     /// </summary>
     public void FireBullet(int Num)
     {
@@ -156,10 +156,10 @@ public class GameGenerator : MonoBehaviour
 
                 audioSource.PlayOneShot(sound1);
 
-                // PlayerController‚©‚çŒü‚¢‚Ä‚¢‚é•ûŒü‚ğæ“¾
+                // PlayerControllerã‹ã‚‰å‘ã„ã¦ã„ã‚‹æ–¹å‘ã‚’å–å¾—
                 Vector3 direction = playerController[Num].GetLookDirection();
 
-                // Bullet‚ÌShootƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚Ä’e‚ğ”­Ë
+                // Bulletã®Shootãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¦å¼¾ã‚’ç™ºå°„
                 bullet[Num].Shoot(direction,playerController[Num]);
 
                 bullet[Num] = null;
@@ -169,14 +169,14 @@ public class GameGenerator : MonoBehaviour
         }
     }
 
-    //“_”‚ğ‰ÁZ‚³‚¹‚é
+    //ç‚¹æ•°ã‚’åŠ ç®—ã•ã›ã‚‹
     public void AddScore(int score)
     {
         gameScore += score;
         textGameScore.text = "Score:"+gameScore.ToString();
     }
 
-    //ƒNƒŠƒAğŒ‚ğ’B¬‚³‚¹‚é
+    //ã‚¯ãƒªã‚¢æ¡ä»¶ã‚’é”æˆã•ã›ã‚‹
     public void Quest(int target)
     {
         audioSource.PlayOneShot(sound2);
@@ -185,7 +185,7 @@ public class GameGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ|[ƒYƒƒjƒ…[ŠÖ˜A
+    /// ãƒãƒ¼ã‚ºãƒ¡ãƒ‹ãƒ¥ãƒ¼é–¢é€£
     /// </summary>
     public void Pose()
     {
@@ -205,7 +205,7 @@ public class GameGenerator : MonoBehaviour
         posemenuPanel.SetActive(true);
     }
 
-    //ƒŠƒXƒ^[ƒg‚·‚é
+    //ãƒªã‚¹ã‚¿ãƒ¼ãƒˆã™ã‚‹
     public void Restart()
     {
         posemenuPanel.SetActive(false);
@@ -223,22 +223,22 @@ public class GameGenerator : MonoBehaviour
         audioSource.PlayOneShot(pageDown);
     }
 
-    //ƒXƒe[ƒWƒZƒŒƒNƒg‚É–ß‚é
+    //ã‚¹ãƒ†ãƒ¼ã‚¸ã‚»ãƒ¬ã‚¯ãƒˆã«æˆ»ã‚‹
     public void StageSelect()
     {
         Time.timeScale = 1;
         audioSource.PlayOneShot(cancel);
-        //‰æ–Ê‘JˆÚ
+        //ç”»é¢é·ç§»
         Initiate.DoneFading();
         Initiate.Fade("StageSelect", Color.black, 0.5f);
     }
 
-    //ƒQ[ƒ€ƒI[ƒo[‚ğ”»’è‚·‚é
+    //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ã‚’åˆ¤å®šã™ã‚‹
     public void GameOver()
     {
         if(currentStage==7||currentStage==8)
         {
-            gameoverText.text = "”C–±¸”s!!";
+            gameoverText.text = "ä»»å‹™å¤±æ•—!!";
         }
         else
         {
@@ -256,7 +256,7 @@ public class GameGenerator : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    //ƒQ[ƒ€ƒNƒŠƒA‚ğ”»’è‚·‚é
+    //ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢ã‚’åˆ¤å®šã™ã‚‹
     public void GameClear()
     {
         NetworkManager.Instance.StageProgress(currentStage);
@@ -277,7 +277,7 @@ public class GameGenerator : MonoBehaviour
     public void Result()
     {
         Time.timeScale = 1;
-        //‰æ–Ê‘JˆÚ
+        //ç”»é¢é·ç§»
         Initiate.DoneFading();
         Initiate.Fade("ResultScene", Color.white, 1.0f);
         
@@ -295,10 +295,10 @@ public class GameGenerator : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
 
-        // Fƒ‰ƒ“ƒ_ƒ€
+        // è‰²ãƒ©ãƒ³ãƒ€ãƒ 
         int rnd = UnityEngine.Random.Range(0, juelPrefabs.Count);
 
-        // ’e‚Ì¶¬
+        // å¼¾ã®ç”Ÿæˆ
         bullet[Num] = Instantiate(bulletPrefab[rnd], firePoint[Num].position + new Vector3(0, 0, -1.0f), Quaternion.identity);
     }
 
@@ -306,7 +306,7 @@ public class GameGenerator : MonoBehaviour
     {
         currentStage = currentScene;
 
-        //‰æ–Ê‘JˆÚ
+        //ç”»é¢é·ç§»
         Initiate.DoneFading();
         Initiate.Fade("Stage"+currentStage, Color.white, 1.0f);
     }

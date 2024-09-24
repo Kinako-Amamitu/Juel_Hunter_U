@@ -12,11 +12,11 @@ public class Area : MonoBehaviour
         var transform = lineRenderer.transform;
         for (int i = 0; i < lineRenderer.positionCount; i++)
         {
-            // LineRenderer‚Ì’¸“_À•W‚ðƒ[ƒJƒ‹À•W‚É•ÏŠ·‚µ‚ÄŽæ“¾‚·‚é
+            // LineRendererã®é ‚ç‚¹åº§æ¨™ã‚’ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã«å¤‰æ›ã—ã¦å–å¾—ã™ã‚‹
             Vector3 point = transform.InverseTransformPoint(transform.TransformPoint(lineRenderer.GetPosition(i)));
             points.Add(point);
         }
-        // PolygonCollider2D‚ÌƒpƒX‚ðÝ’è
+        // PolygonCollider2Dã®ãƒ‘ã‚¹ã‚’è¨­å®š
         GetComponent<EdgeCollider2D>().SetPoints(points);
     }
 }

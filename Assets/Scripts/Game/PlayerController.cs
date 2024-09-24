@@ -26,17 +26,17 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        /* �}�E�X�N���b�N�����m */
+        /* マウスクリックを検知 */
         if (Input.GetMouseButtonDown(0))
         {
 
-            // �^�b�v�����ꏊ����Ray���쐬
+            // タップした場所からRayを作成
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            // Raycast���쐬
+            // Raycastを作成
             RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
 
-            //Ray�������ɏՓ˂������Ƃ����m & �Փ˂����Ώۂ��������g���𔻕�
+            //Rayが何かに衝突したことを検知 & 衝突した対象が自分自身かを判別
             if (hit2d && hit2d.transform.gameObject.tag == playerTag)
             {
                 
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         
     }
     /// <summary>
-    /// �v���C���[�̐i�s�����̎擾�p
+    /// プレイヤーの進行方向の取得用
     /// </summary>
     /// <returns></returns>
     public Vector3 GetLookDirection()

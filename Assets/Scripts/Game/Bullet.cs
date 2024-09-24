@@ -8,14 +8,14 @@ using System;
 using DG.Tweening;
 
 /// <summary>
-/// ’e‚ÌƒvƒŒƒnƒu‚ÉƒAƒ^ƒbƒ`‚·‚é§Œä—pƒNƒ‰ƒX
+/// å¼¾ã®ãƒ—ãƒ¬ãƒãƒ–ã«ã‚¢ã‚¿ãƒƒãƒã™ã‚‹åˆ¶å¾¡ç”¨ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float bulletSpeed;@// ’e‚Ì‘¬“x
-    [SerializeField] private float destroyTime;@// ’e‚Ì¶‘¶ŠúŠÔ
-    [SerializeField] GameObject over; //ƒŒƒCİ’è—pƒIƒuƒWƒFƒNƒg
-    [SerializeField] GameObject juel; //”»’è‚Ég‚¤—p‚ÌƒWƒ…ƒGƒ‹
+    [SerializeField] private float bulletSpeed;ã€€// å¼¾ã®é€Ÿåº¦
+    [SerializeField] private float destroyTime;ã€€// å¼¾ã®ç”Ÿå­˜æœŸé–“
+    [SerializeField] GameObject over; //ãƒ¬ã‚¤è¨­å®šç”¨ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+    [SerializeField] GameObject juel; //åˆ¤å®šã«ä½¿ã†ç”¨ã®ã‚¸ãƒ¥ã‚¨ãƒ«
     [SerializeField] GameGenerator gameGenerator;
     //PlayerController playerController;
 
@@ -38,12 +38,12 @@ public class Bullet : MonoBehaviour
       
     }
     /// <summary>
-    /// ƒoƒŒƒbƒg”­Ë
+    /// ãƒãƒ¬ãƒƒãƒˆç™ºå°„
     /// </summary>
     public void Shoot(Vector2 direction,PlayerController player)
     {
 
-        // ’e‚É Rigidbody2D ƒRƒ“ƒ|[ƒlƒ“ƒg‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚é‚©Šm”F‚µ‚½ã‚Å
+        // å¼¾ã« Rigidbody2D ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã‚‹ã‹ç¢ºèªã—ãŸä¸Šã§
         if (TryGetComponent(out Rigidbody2D rb))
         {
 
@@ -56,7 +56,7 @@ public class Bullet : MonoBehaviour
             }
         }
 
-        // ˆê’èŠÔŒã‚É’e‚ğ”j‰ó‚·‚é
+        // ä¸€å®šæ™‚é–“å¾Œã«å¼¾ã‚’ç ´å£Šã™ã‚‹
         //Destroy(gameObject, destroyTime);
     }
 
@@ -126,7 +126,7 @@ public class Bullet : MonoBehaviour
                     {
                         if(hit2.collider.tag==gameObject.tag)
                         {
-                            //¶‰E‚ÌƒWƒ…ƒGƒ‹‚Æ©g‚ğÁ‚·
+                            //å·¦å³ã®ã‚¸ãƒ¥ã‚¨ãƒ«ã¨è‡ªèº«ã‚’æ¶ˆã™
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
@@ -164,7 +164,7 @@ public class Bullet : MonoBehaviour
                     {
                         if (hit2.collider.tag == gameObject.tag)
                         {
-                            //¶‰E‚ÌƒWƒ…ƒGƒ‹‚Æ©g‚ğÁ‚·
+                            //å·¦å³ã®ã‚¸ãƒ¥ã‚¨ãƒ«ã¨è‡ªèº«ã‚’æ¶ˆã™
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
@@ -202,7 +202,7 @@ public class Bullet : MonoBehaviour
                     {
                         if (hit2.collider.tag == gameObject.tag)
                         {
-                            //¶‰E‚ÌƒWƒ…ƒGƒ‹‚Æ©g‚ğÁ‚·
+                            //å·¦å³ã®ã‚¸ãƒ¥ã‚¨ãƒ«ã¨è‡ªèº«ã‚’æ¶ˆã™
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
@@ -240,7 +240,7 @@ public class Bullet : MonoBehaviour
                     {
                         if (hit2.collider.tag == gameObject.tag)
                         {
-                            //¶‰E‚ÌƒWƒ…ƒGƒ‹‚Æ©g‚ğÁ‚·
+                            //å·¦å³ã®ã‚¸ãƒ¥ã‚¨ãƒ«ã¨è‡ªèº«ã‚’æ¶ˆã™
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
@@ -279,7 +279,7 @@ public class Bullet : MonoBehaviour
                     {
                         if (hit2.collider.tag == gameObject.tag)
                         {
-                            //¶‰E‚ÌƒWƒ…ƒGƒ‹‚Æ©g‚ğÁ‚·
+                            //å·¦å³ã®ã‚¸ãƒ¥ã‚¨ãƒ«ã¨è‡ªèº«ã‚’æ¶ˆã™
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
                             Destroy(hit.collider.gameObject);
