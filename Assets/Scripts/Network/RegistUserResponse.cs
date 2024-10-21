@@ -7,4 +7,7 @@ public class RegistUserResponse
 {
  [JsonProperty("user_id")]
  public int UserID { get; set; }
+
+    [JsonProperty("token")]
+public string Authtoken { get; set; }
 }

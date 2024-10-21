@@ -5,9 +5,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using Newtonsoft.Json;
+using UnityEngine.Networking;
 
 public class GameGenerator : MonoBehaviour
 {
+
+
+    private int userID = 0;  //自分のユーザーID
+    private int stageID = 0; //ステージID
+    private int score = 0; //スコア
+
     [SerializeField] List<Bullet> bulletPrefab;     // 弾のプレファブ
     [SerializeField] private Transform[] firePoint;     // 発射ポイント
     //[SerializeField] private float fireRate = 2.0f;   // 発射間隔(秒)
@@ -15,7 +23,7 @@ public class GameGenerator : MonoBehaviour
     [SerializeField] List<GameObject> juelPrefabs; //判定に使う用のジュエルプレハブ
     [SerializeField] private Transform outZone; //ゲームオーバー判定位置
     [SerializeField] float gameTimer; //ゲーム時間
-    [SerializeField]int juelRequired; //条件個数
+    [SerializeField] int juelRequired; //条件個数
     [SerializeField] int playerNum; //プレイヤー数
 
     // 削除できるアイテム数
@@ -27,13 +35,18 @@ public class GameGenerator : MonoBehaviour
     //スコア
     public static int gameScore;
 
+    public int Score
+    {
+        get { return gameScore; }
+    }
+
     //シーンの判定変数
     public static int currentStage;
 
-    
+
 
     //ゲームの判定
-    public bool isgameOver=false;
+    public bool isgameOver = false;
     public bool isgameClear = false;
 
     Bullet[] bullet;
@@ -64,7 +77,8 @@ public class GameGenerator : MonoBehaviour
 
     private void Start()
     {
-     
+        //点数初期化
+        gameScore = 0;
 
         //オブジェクトクラスを取得
         obj = GetComponent<ObjCtrl>();
@@ -82,11 +96,11 @@ public class GameGenerator : MonoBehaviour
         target1.text = juelRequired.ToString();
 
         //初弾のジュエルを抽選
-        for(int i=0;i<playerNum;i++)
+        for (int i = 0; i < playerNum; i++)
         {
             StartCoroutine(UpdateBullet(i));
         }
-        
+
     }
 
     private void Update()
@@ -103,9 +117,9 @@ public class GameGenerator : MonoBehaviour
         gameTimer -= Time.deltaTime;
         textGameTimer.text = "Time:" + (int)gameTimer;
 
-        if(juelRequired<=0)
+        if (juelRequired <= 0)
         {
-            target1.text ="OK！！" ;
+            target1.text = "OK！！";
 
             GameClear();
         }
@@ -113,15 +127,15 @@ public class GameGenerator : MonoBehaviour
         //ゲーム終了
         if (gameTimer <= 0)
         {
-            
-         
+
+
 
             GameOver();
 
             // Updateに入らないようにする
             enabled = false;
-          
-;            // この時点でUpdateから抜ける
+
+            ;            // この時点でUpdateから抜ける
             return;
         }
 
@@ -139,11 +153,11 @@ public class GameGenerator : MonoBehaviour
     /// </summary>
     public void FireBullet(int Num)
     {
-        if(isgameOver==true)
+        if (isgameOver == true)
         {
             return;
         }
-        else if(isgameClear==true)
+        else if (isgameClear == true)
         {
             return;
         }
@@ -160,7 +174,7 @@ public class GameGenerator : MonoBehaviour
                 Vector3 direction = playerController[Num].GetLookDirection();
 
                 // BulletのShootメソッドを呼び出して弾を発射
-                bullet[Num].Shoot(direction,playerController[Num]);
+                bullet[Num].Shoot(direction, playerController[Num]);
 
                 bullet[Num] = null;
 
@@ -173,7 +187,7 @@ public class GameGenerator : MonoBehaviour
     public void AddScore(int score)
     {
         gameScore += score;
-        textGameScore.text = "Score:"+gameScore.ToString();
+        textGameScore.text = "Score:" + gameScore.ToString();
     }
 
     //クリア条件を達成させる
@@ -236,7 +250,7 @@ public class GameGenerator : MonoBehaviour
     //ゲームオーバーを判定する
     public void GameOver()
     {
-        if(currentStage==7||currentStage==8)
+        if (currentStage == 7 || currentStage == 8)
         {
             gameoverText.text = "任務失敗!!";
         }
@@ -248,8 +262,8 @@ public class GameGenerator : MonoBehaviour
         gameoverPanel.SetActive(true);
         isgameOver = true;
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
-        
-        if(playerNum==2)
+
+        if (playerNum == 2)
         {
             GameObject.Find("Player2").GetComponent<ObjCtrl>().GameModeChange();
         }
@@ -261,9 +275,10 @@ public class GameGenerator : MonoBehaviour
     {
         NetworkManager.Instance.StageProgress(currentStage);
         audioSource.PlayOneShot(gameClear);
-        stageclearText.text="StageClear!!";
-        AddScore((int)Math.Ceiling(gameTimer)*30);
+        stageclearText.text = "StageClear!!";
+        AddScore((int)Math.Ceiling(gameTimer) * 30);
         isgameClear = true;
+
         GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
         if (playerNum == 2)
         {
@@ -277,10 +292,19 @@ public class GameGenerator : MonoBehaviour
     public void Result()
     {
         Time.timeScale = 1;
+        bool isSuccess = NetworkManager.Instance.LoadUserData();
+        /*if (isSuccess)*/
+
+        StartCoroutine(NetworkManager.Instance.RegistScore(gameScore, currentStage, result =>
+        {
+            textGameScore.text = gameScore.ToString();
+        }));
+
         //画面遷移
         Initiate.DoneFading();
         Initiate.Fade("ResultScene", Color.white, 1.0f);
-        
+
+
     }
 
     public void Retry()
@@ -302,13 +326,13 @@ public class GameGenerator : MonoBehaviour
         bullet[Num] = Instantiate(bulletPrefab[rnd], firePoint[Num].position + new Vector3(0, 0, -1.0f), Quaternion.identity);
     }
 
-   static public void UpdateStageScene(int currentScene)
+    static public void UpdateStageScene(int currentScene)
     {
         currentStage = currentScene;
 
         //画面遷移
         Initiate.DoneFading();
-        Initiate.Fade("Stage"+currentStage, Color.white, 1.0f);
+        Initiate.Fade("Stage" + currentStage, Color.white, 1.0f);
     }
 
     public static int Scoreset()

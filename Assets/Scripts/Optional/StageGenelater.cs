@@ -34,4 +34,12 @@ public class StageGenelater : MonoBehaviour
         audioSource.PlayOneShot(stageEnter);
         GameGenerator.UpdateStageScene(stageNum);
     }
+
+    public void Title()
+    {
+        audioSource.PlayOneShot(stageEnter);
+        //画面遷移
+        Initiate.DoneFading();
+        Initiate.Fade("Title", Color.black, 0.5f);
+    }
 }

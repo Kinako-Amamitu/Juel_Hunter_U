@@ -29,6 +29,7 @@ public class Title : MonoBehaviour
             }
         }
         */
+
     }
 
     public void GameStart()
@@ -38,7 +39,8 @@ public class Title : MonoBehaviour
         if (!isSuccess)
         {
             //ユーザーデータが保存されていない場合は登録
-            StartCoroutine(NetworkManager.Instance.RegistUser(Guid.NewGuid().ToString(), result => {
+            StartCoroutine(NetworkManager.Instance.RegistUser(Guid.NewGuid().ToString(), result =>
+            {
                 //画面遷移
                 Initiate.DoneFading();
                 Initiate.Fade("StageSelect", Color.black, 0.5f);
@@ -46,9 +48,21 @@ public class Title : MonoBehaviour
         }
         else
         {
+
             //画面遷移
             Initiate.DoneFading();
             Initiate.Fade("StageSelect", Color.black, 0.5f);
         };
+    }
+
+    //ゲーム終了
+    public void EndGame()
+    {
+
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+    Application.Quit();//ゲームプレイ終了
+#endif
     }
 }

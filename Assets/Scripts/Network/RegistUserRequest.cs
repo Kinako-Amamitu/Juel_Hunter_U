@@ -7,5 +7,4 @@ public class RegistUserRequest
 {
     [JsonProperty("name")]
     public string Name { get; set; }
-
 }

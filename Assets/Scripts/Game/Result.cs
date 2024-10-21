@@ -55,4 +55,13 @@ public class Result : MonoBehaviour
 
         
     }
+
+    public void Ranking()
+    {
+        audioSource.PlayOneShot(retry);
+
+        //画面遷移
+        Initiate.DoneFading();
+        Initiate.Fade("Ranking", Color.white, 1.0f);
+    }
 }
