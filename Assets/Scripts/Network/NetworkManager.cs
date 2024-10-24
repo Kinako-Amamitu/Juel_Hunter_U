@@ -8,10 +8,14 @@ using UnityEngine.Networking;
 
 public class NetworkManager : MonoBehaviour
 {
-
+#if DEBUG
+    const string API_BASE_URL = "http://localhost:8000/api/";
+#else
+    const string API_BASE_URL = "https://api-juelhunter.japaneast.cloudapp.azure.com/api/";//APIのデプロイURL
+#endif
     private static NetworkManager instance;
 
-    const string API_BASE_URL = "http://localhost:8000/api/";
+    
     private int userID = 0;  //自分のユーザーID
     private string userName = ""; //自分のユーザー名
 
