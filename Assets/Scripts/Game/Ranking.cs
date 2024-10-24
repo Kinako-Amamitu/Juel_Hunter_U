@@ -15,6 +15,9 @@ public class Ranking : MonoBehaviour
 
     [SerializeField] Text stage;
     [SerializeField] Text[] ranking;
+    [SerializeField] Text[] rankingCurrent;
+
+    
 
     ////ランキング表示用のテキストプレハブ
     //[SerializeField] GameObject rankItemPrefab;
@@ -25,6 +28,7 @@ public class Ranking : MonoBehaviour
 
     public void LordRanking()
     {
+      
         StartCoroutine(NetworkManager.Instance.GetScore(currentStage, result =>
         {
             for(int i=0;i<ranking.Length;i++)
@@ -36,19 +40,39 @@ public class Ranking : MonoBehaviour
 
                 if (i==0)
                 {
-                    ranking[i].text = string.Format("1st:{0}", result[i].Score);
+                    // 色を指定
+                    rankingCurrent[i].color = new Color(1.0f, 0.92f, 0.016f, 1.0f);
+                    rankingCurrent[i].text = string.Format("1st");
+                    // 色を指定
+                    ranking[i].color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                    ranking[i].text += string.Format("{0}",result[i].Score);
                 }
                 else if (i == 1)
                 {
-                    ranking[i].text = string.Format("2nd:{0}", result[i].Score);
+                    // 色を指定
+                    rankingCurrent[i].color = new Color(0.5f, 0.5f, 0.5f, 1.0f);
+                    rankingCurrent[i].text = string.Format("2nd");
+                    // 色を指定
+                    ranking[i].color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                    ranking[i].text += string.Format("{0}", result[i].Score);
                 }
                 else if (i == 2)
                 {
-                    ranking[i].text = string.Format("3rd:{0}", result[i].Score);
+                    // 色を指定
+                    rankingCurrent[i].color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+                    rankingCurrent[i].text = string.Format("3rd");
+                    // 色を指定
+                    ranking[i].color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                    ranking[i].text += string.Format("{0}", result[i].Score);
                 }
                 else
                 {
-                    ranking[i].text = string.Format("{0}th:{1}",i+1, result[i].Score);
+                    // 色を指定
+                    rankingCurrent[i].color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                    rankingCurrent[i].text = string.Format("{0}th",i+1);
+                    // 色を指定
+                    ranking[i].color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+                    ranking[i].text += string.Format("{0}", result[i].Score);
                 }
 
             }
@@ -97,6 +121,8 @@ public class Ranking : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+
         currentStage = GameGenerator.Stageset();
         stage.text = string.Format("STAGE: {0}", currentStage);
 
