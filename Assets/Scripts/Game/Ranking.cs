@@ -121,10 +121,18 @@ public class Ranking : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
 
         currentStage = GameGenerator.Stageset();
-        stage.text = string.Format("STAGE: {0}", currentStage);
+        if (currentStage == 0)
+        {
+            currentStage = 1;
+            stage.text = string.Format("STAGE: {0}", currentStage);
+        }
+        else
+        {
+            stage.text = string.Format("STAGE: {0}", currentStage);
+        }
+        
 
         LordRanking();
     }
@@ -134,6 +142,49 @@ public class Ranking : MonoBehaviour
     {
 
 
+    }
+
+    public void RankingDown()
+    {
+        if(currentStage==1)
+        {
+            currentStage += 11;
+        }
+        else
+        {
+            currentStage--;
+        }
+        stage.text = string.Format("STAGE: {0}", currentStage);
+
+        for (int i = 0; i < ranking.Length; i++)
+        {
+            rankingCurrent[i].text = null;
+            ranking[i].text ="";
+        }
+            LordRanking();
+
+        
+    }
+
+    public void RankingUp()
+    {
+        if(currentStage==12)
+        {
+            currentStage -= 11;
+        }
+        else
+        {
+            currentStage++;
+        }
+        stage.text = string.Format("STAGE: {0}", currentStage);
+        for (int i = 0; i < ranking.Length; i++)
+        {
+            rankingCurrent[i].text = null;
+            ranking[i].text = "";
+        }
+        LordRanking();
+
+        
     }
 
     public void StageSelect()

@@ -1504,6 +1504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab:
+  - {fileID: 4334701413000337186, guid: 436455a97b0fe3741af9886cf9ef5c6b, type: 3}
   - {fileID: 1748721844653493682, guid: 3cd247095df094d45bb18f6e7010ab13, type: 3}
   - {fileID: 1504964287210747409, guid: 82c61d79041b05944b4c628d32c24048, type: 3}
   - {fileID: 3079424045588693431, guid: 5074c88c844655e47bcf3c3846f10c05, type: 3}
@@ -1513,6 +1514,7 @@ MonoBehaviour:
   playerController:
   - {fileID: 630670371}
   juelPrefabs:
+  - {fileID: 3739465851540494416, guid: 436455a97b0fe3741af9886cf9ef5c6b, type: 3}
   - {fileID: 3429054592348906710, guid: 3cd247095df094d45bb18f6e7010ab13, type: 3}
   - {fileID: 3047130442980686329, guid: 82c61d79041b05944b4c628d32c24048, type: 3}
   - {fileID: 4162968277313547898, guid: 5074c88c844655e47bcf3c3846f10c05, type: 3}
@@ -2061,7 +2063,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07723729, y: -0.0841434}
+  m_Offset: {x: -0.028114766, y: -0.0841434}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2072,7 +2074,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8455254, y: 1.1682868}
+  m_Size: {x: 0.7472803, y: 1.1682868}
   m_EdgeRadius: 0
 --- !u!4 &517174263
 Transform:
@@ -2359,7 +2361,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07723729, y: -0.0841434}
+  m_Offset: {x: 0.055386744, y: -0.0841434}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2370,7 +2372,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8455254, y: 1.1682868}
+  m_Size: {x: 0.58027726, y: 1.1682868}
   m_EdgeRadius: 0
 --- !u!4 &569942176
 Transform:
@@ -3991,10 +3993,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.08949098
-    width: 1
-    height: 0.82101804
+    x: 0.125
+    y: 0
+    width: 0.75
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

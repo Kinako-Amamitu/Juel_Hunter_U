@@ -17,25 +17,44 @@ public class Bullet : MonoBehaviour
     [SerializeField] GameObject over; //レイ設定用オブジェクト
     [SerializeField] GameObject juel; //判定に使う用のジュエル
     [SerializeField] GameGenerator gameGenerator;
+    [SerializeField] private GameObject explosionPrefab; //爆発エフェクト
+    [SerializeField] private GameObject getPrefab; //取得エフェクト
     //PlayerController playerController;
 
-    
+
 
     int layerMask = 1 << 7;
-    
 
+    int juelTime = 0;//ジュエルの待機時間
+
+    bool juelMode = true; //ジュエルの状態
 
     private void Start()
     {
-       
-       
+
+
+
         gameGenerator = GameObject.Find("GameGenerator").GetComponent<GameGenerator>();
         GetComponent<ObjCtrl>();
     }
 
     private void Update()
     {
-      
+        if(juelMode==false)
+        {
+            juelTime++;
+            if (juelTime > 100)
+            {
+                Destroy(gameObject);
+            }
+        }
+        else if(juelMode==true)
+        {
+            juelTime = 0;
+        }
+
+ 
+        
     }
     /// <summary>
     /// バレット発射
@@ -54,48 +73,63 @@ public class Bullet : MonoBehaviour
                
                 this.transform.DOMove(hit.point, 1.0f);
             }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         // 一定時間後に弾を破壊する
         //Destroy(gameObject, destroyTime);
     }
 
-    public void Bomb()
+    public void Explosion(GameObject gameObject)
     {
+
+        var h = Physics2D.CircleCastAll(gameObject.transform.position,1.0f, Vector2.zero);
+        Debug.Log(h.Length);
+        foreach (var hit in h)
+        {
+            if (hit.collider.CompareTag("Black")|| 
+                hit.collider.CompareTag("Red") ||
+               hit.collider.CompareTag("Blue") ||
+               hit.collider.CompareTag("Green") ||
+               hit.collider.CompareTag("Purple") ||
+               hit.collider.CompareTag("Yellow")||
+               hit.collider.CompareTag("Enemy"))
+            {
+                Destroy(hit.collider.gameObject);
+                gameGenerator.AddScore(50);
+            }
+        }
+        GameObject explosion = Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
+        explosion.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        gameGenerator.Explosion();
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        /*
-        if(collision.gameObject.tag=="Rail(right)")
-        {
-            GetComponent<Rigidbody2D>().velocity=new Vector2(0.1f,0);
-        }       
-        else if(collision.gameObject.tag=="Rail(down)")
-        {
-            GetComponent<Rigidbody2D>().velocity=new Vector2(0f,-0.1f);
-        }
-        */
+
         if (collision.gameObject.tag == "Out")
-        {
-            GameObject.Find("Player").GetComponent<ObjCtrl>().isgameMode = true;
+            {
+                GameObject.Find("Player").GetComponent<ObjCtrl>().isgameMode = true;
 
-            gameGenerator.GameOver();
+                gameGenerator.GameOver();
 
-        }
-        else if (collision.gameObject.tag == "LeftWall")
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0.1f, 0);
-        }
-        else if (collision.gameObject.tag == "Black_hole")
-        {
-            Destroy(gameObject);
-        }    
-        else if (collision.gameObject.tag == "Enemy_hole")
-        {
-            Destroy(gameObject);
-        }
+            }
+            else if (collision.gameObject.tag == "LeftWall")
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0.1f, 0);
+            }
+            else if (collision.gameObject.tag == "Black_hole")
+            {
+                Destroy(gameObject);
+            }
+            else if (collision.gameObject.tag == "Enemy_hole")
+            {
+                Destroy(gameObject);
+            }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -103,6 +137,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.gameObject.tag == "Rail(right)")
         {
+            juelMode = true;
             bool isSameright=false;
 
             GetComponent<Rigidbody2D>().velocity = new Vector2(0.2f, 0);
@@ -114,6 +149,58 @@ public class Bullet : MonoBehaviour
 
             if (hit.collider)
             {
+                if(gameObject.tag=="Black")
+                {
+                    if (hit.collider.tag != "Black"&&
+                        hit.collider.tag == "Rail(right)"&&
+                        hit.collider.tag != "Rail(down)" && 
+                        hit.collider.tag != "Rail(up)" &&
+                        hit.collider.tag != "Rail(down)" &&
+                        hit.collider.tag != "Rail(down)(slow)" &&
+                        hit.collider.tag != "Untagged"&&
+                        hit.collider.tag != "Black_hole"&&
+                        hit.collider.tag != "Black_hole"&&
+                        hit.collider.tag != "Bomb")
+                    {
+                        isSameright = true;
+
+                        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - transform.right * 0.4f, transform.right * -1, 0.6f);
+
+                        Debug.DrawRay(transform.position - transform.right * 0.4f, transform.right * -0.6f, Color.red, 5);
+
+                        if (hit2.collider)
+                        {
+                            if (hit.collider.tag != "Black" &&
+                                hit.collider.tag == "Rail(right)" &&
+                                 hit.collider.tag != "Rail(down)" &&
+                                 hit.collider.tag != "Rail(up)" &&
+                                 hit.collider.tag != "Rail(down)" &&
+                                    hit.collider.tag != "Rail(down)(slow)" &&
+                                    hit.collider.tag != "Untagged" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Bomb")
+                            {
+                                //取得エフェクト
+                                GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
+                                GameObject get2 = Instantiate(getPrefab, hit.collider.transform.position, Quaternion.identity);
+                                GameObject get3 = Instantiate(getPrefab, hit2.collider.gameObject.transform.position, Quaternion.identity);
+                                get1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                                get2.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                                get3.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+                                //左右のジュエルと自身を消す
+                                Destroy(gameObject);
+                                Destroy(hit2.collider.gameObject);
+                                Destroy(hit.collider.gameObject);
+
+
+                                gameGenerator.Quest(3);
+                                gameGenerator.AddScore(100);
+                            }
+                        }
+                    }
+                }
                 if (hit.collider.tag == gameObject.tag)
                 {
                     isSameright = true;
@@ -126,6 +213,14 @@ public class Bullet : MonoBehaviour
                     {
                         if(hit2.collider.tag==gameObject.tag)
                         {
+                            //取得エフェクト
+                            GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
+                            GameObject get2 = Instantiate(getPrefab, hit.collider.transform.position, Quaternion.identity);
+                            GameObject get3 = Instantiate(getPrefab, hit2.collider.gameObject.transform.position, Quaternion.identity);
+                            get1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            get2.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            get3.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
                             //左右のジュエルと自身を消す
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
@@ -142,6 +237,7 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Rail(up)")
         {
+            juelMode = true;
             bool isSameright = false;
 
             GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.2f);
@@ -152,7 +248,59 @@ public class Bullet : MonoBehaviour
 
             if (hit.collider)
             {
-                if (hit.collider.tag == gameObject.tag)
+                if (gameObject.tag == "Black")
+                {
+                    if (hit.collider.tag != "Black" &&
+                        hit.collider.tag == "Rail(right)" &&
+                   hit.collider.tag != "Rail(down)" &&
+                   hit.collider.tag != "Rail(up)" &&
+                   hit.collider.tag != "Rail(down)" &&
+                   hit.collider.tag != "Rail(down)(slow)" &&
+                   hit.collider.tag != "Untagged" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Bomb")
+                    {
+                        isSameright = true;
+
+                        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - transform.up * 0.4f, transform.up * -1, 0.6f);
+
+                        Debug.DrawRay(transform.position - transform.up * 0.4f, transform.up * -0.6f, Color.red, 5);
+
+                        if (hit2.collider)
+                        {
+                            if (hit.collider.tag != "Black" &&
+                                hit.collider.tag == "Rail(right)" &&
+                                hit.collider.tag != "Rail(down)" &&
+                                 hit.collider.tag != "Rail(up)" &&
+                                 hit.collider.tag != "Rail(down)" &&
+                                    hit.collider.tag != "Rail(down)(slow)" &&
+                                    hit.collider.tag != "Untagged" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Bomb")
+                            {
+                                //取得エフェクト
+                                GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
+                                GameObject get2 = Instantiate(getPrefab, hit.collider.transform.position, Quaternion.identity);
+                                GameObject get3 = Instantiate(getPrefab, hit2.collider.gameObject.transform.position, Quaternion.identity);
+                                get1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                                get2.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                                get3.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+                                //左右のジュエルと自身を消す
+                                Destroy(gameObject);
+                                Destroy(hit2.collider.gameObject);
+                                Destroy(hit.collider.gameObject);
+
+
+                                gameGenerator.Quest(3);
+                                gameGenerator.AddScore(100);
+                            }
+                        }
+                    }
+                }
+                    if (hit.collider.tag == gameObject.tag)
                 {
                     isSameright = true;
 
@@ -164,6 +312,14 @@ public class Bullet : MonoBehaviour
                     {
                         if (hit2.collider.tag == gameObject.tag)
                         {
+                            //取得エフェクト
+                            GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
+                            GameObject get2 = Instantiate(getPrefab, hit.collider.transform.position, Quaternion.identity);
+                            GameObject get3 = Instantiate(getPrefab, hit2.collider.gameObject.transform.position, Quaternion.identity);
+                            get1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            get2.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            get3.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
                             //左右のジュエルと自身を消す
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
@@ -180,7 +336,8 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Rail(down)")
         {
-           bool isSameright = false;
+            juelMode = true;
+            bool isSameright = false;
 
             GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -0.2f);
 
@@ -190,6 +347,58 @@ public class Bullet : MonoBehaviour
 
             if (hit.collider)
             {
+                if (gameObject.tag == "Black")
+                {
+                    if (hit.collider.tag != "Black" &&
+                        hit.collider.tag == "Rail(right)" &&
+                   hit.collider.tag != "Rail(down)" &&
+                   hit.collider.tag != "Rail(up)" &&
+                   hit.collider.tag != "Rail(down)" &&
+                   hit.collider.tag != "Rail(down)(slow)" &&
+                   hit.collider.tag != "Untagged" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Bomb")
+                    {
+                        isSameright = true;
+
+                        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - transform.up * 0.4f, transform.up * -1, 0.6f);
+
+                        Debug.DrawRay(transform.position - transform.up * 0.4f, transform.up * -0.6f, Color.red, 5);
+
+                        if (hit2.collider)
+                        {
+                            if (hit.collider.tag != "Black" &&
+                                hit.collider.tag == "Rail(right)" &&
+                                 hit.collider.tag != "Rail(down)" &&
+                                hit.collider.tag != "Rail(up)" &&
+                                hit.collider.tag != "Rail(down)" &&
+                                hit.collider.tag != "Rail(down)(slow)" &&
+                                hit.collider.tag != "Untagged" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Bomb")
+                            {
+                                //取得エフェクト
+                                GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
+                                GameObject get2 = Instantiate(getPrefab, hit.collider.transform.position, Quaternion.identity);
+                                GameObject get3 = Instantiate(getPrefab, hit2.collider.gameObject.transform.position, Quaternion.identity);
+                                get1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                                get2.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                                get3.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+                                //左右のジュエルと自身を消す
+                                Destroy(gameObject);
+                                Destroy(hit2.collider.gameObject);
+                                Destroy(hit.collider.gameObject);
+
+
+                                gameGenerator.Quest(3);
+                                gameGenerator.AddScore(100);
+                            }
+                        }
+                    }
+                }
                 if (hit.collider.tag == gameObject.tag)
                 {
                     isSameright = true;
@@ -202,6 +411,14 @@ public class Bullet : MonoBehaviour
                     {
                         if (hit2.collider.tag == gameObject.tag)
                         {
+                            //取得エフェクト
+                            GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
+                            GameObject get2 = Instantiate(getPrefab, hit.collider.transform.position, Quaternion.identity);
+                            GameObject get3 = Instantiate(getPrefab, hit2.collider.gameObject.transform.position, Quaternion.identity);
+                            get1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            get2.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            get3.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
                             //左右のジュエルと自身を消す
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
@@ -218,6 +435,7 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Rail(down)(slow)")
         {
+            juelMode = true;
             bool isSameright = false;
 
             GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, -0.1f);
@@ -228,6 +446,58 @@ public class Bullet : MonoBehaviour
 
             if (hit.collider)
             {
+                if (gameObject.tag == "Black")
+                {
+                    if (hit.collider.tag != "Black" &&
+                        hit.collider.tag == "Rail(right)" &&
+                   hit.collider.tag != "Rail(down)" &&
+                   hit.collider.tag != "Rail(up)" &&
+                   hit.collider.tag != "Rail(down)" &&
+                   hit.collider.tag != "Rail(down)(slow)" &&
+                   hit.collider.tag != "Untagged" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Bomb")
+                    {
+                        isSameright = true;
+
+                        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - transform.up * 0.4f, transform.up * -1, 0.6f);
+
+                        Debug.DrawRay(transform.position - transform.up * 0.4f, transform.up * -0.6f, Color.red, 5);
+
+                        if (hit2.collider)
+                        {
+                            if (hit.collider.tag != "Black" &&
+                                hit.collider.tag == "Rail(right)" &&
+                                hit.collider.tag != "Rail(down)" &&
+                                hit.collider.tag != "Rail(up)" &&
+                                hit.collider.tag != "Rail(down)" &&
+                                hit.collider.tag != "Rail(down)(slow)" &&
+                                hit.collider.tag != "Untagged" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Bomb")
+                            {
+                                //取得エフェクト
+                                GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
+                                GameObject get2 = Instantiate(getPrefab, hit.collider.transform.position, Quaternion.identity);
+                                GameObject get3 = Instantiate(getPrefab, hit2.collider.gameObject.transform.position, Quaternion.identity);
+                                get1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                                get2.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                                get3.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+                                //左右のジュエルと自身を消す
+                                Destroy(gameObject);
+                                Destroy(hit2.collider.gameObject);
+                                Destroy(hit.collider.gameObject);
+
+
+                                gameGenerator.Quest(3);
+                                gameGenerator.AddScore(100);
+                            }
+                        }
+                    }
+                }
                 if (hit.collider.tag == gameObject.tag)
                 {
                     isSameright = true;
@@ -240,6 +510,14 @@ public class Bullet : MonoBehaviour
                     {
                         if (hit2.collider.tag == gameObject.tag)
                         {
+                            //取得エフェクト
+                            GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
+                            GameObject get2 = Instantiate(getPrefab, hit.collider.transform.position, Quaternion.identity);
+                            GameObject get3 = Instantiate(getPrefab, hit2.collider.gameObject.transform.position, Quaternion.identity);
+                            get1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            get2.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            get3.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
                             //左右のジュエルと自身を消す
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
@@ -256,6 +534,7 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Rail(left)")
         {
+            juelMode = true;
             bool isSameright = false;
 
             GetComponent<Rigidbody2D>().velocity = new Vector2(-0.2f, 0);
@@ -267,6 +546,58 @@ public class Bullet : MonoBehaviour
 
             if (hit.collider)
             {
+                if (gameObject.tag == "Black")
+                {
+                    if (hit.collider.tag != "Black" &&
+                        hit.collider.tag == "Rail(right)" &&
+                   hit.collider.tag != "Rail(down)" &&
+                   hit.collider.tag != "Rail(up)" &&
+                   hit.collider.tag != "Rail(down)" &&
+                   hit.collider.tag != "Rail(down)(slow)" &&
+                   hit.collider.tag != "Untagged" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Bomb")
+                    {
+                        isSameright = true;
+
+                        RaycastHit2D hit2 = Physics2D.Raycast(transform.position - transform.right * 0.4f, transform.right * -1, 0.6f);
+
+                        Debug.DrawRay(transform.position - transform.right * 0.4f, transform.right * -0.6f, Color.red, 5);
+
+                        if (hit2.collider)
+                        {
+                            if (hit.collider.tag != "Black" &&
+                                hit.collider.tag == "Rail(right)" &&
+                                 hit.collider.tag != "Rail(down)" &&
+                                hit.collider.tag != "Rail(up)" &&
+                                 hit.collider.tag != "Rail(down)" &&
+                                 hit.collider.tag != "Rail(down)(slow)" &&
+                                 hit.collider.tag != "Untagged" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Black_hole" &&
+                        hit.collider.tag != "Bomb")
+                            {
+                                //取得エフェクト
+                                GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
+                                GameObject get2 = Instantiate(getPrefab, hit.collider.transform.position, Quaternion.identity);
+                                GameObject get3 = Instantiate(getPrefab, hit2.collider.gameObject.transform.position, Quaternion.identity);
+                                get1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                                get2.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                                get3.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+                                //左右のジュエルと自身を消す
+                                Destroy(gameObject);
+                                Destroy(hit2.collider.gameObject);
+                                Destroy(hit.collider.gameObject);
+
+
+                                gameGenerator.Quest(3);
+                                gameGenerator.AddScore(100);
+                            }
+                        }
+                    }
+                }
                 if (hit.collider.tag == gameObject.tag)
                 {
                     isSameright = true;
@@ -279,6 +610,14 @@ public class Bullet : MonoBehaviour
                     {
                         if (hit2.collider.tag == gameObject.tag)
                         {
+                            //取得エフェクト
+                            GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
+                            GameObject get2 = Instantiate(getPrefab, hit.collider.transform.position, Quaternion.identity);
+                            GameObject get3 = Instantiate(getPrefab, hit2.collider.gameObject.transform.position, Quaternion.identity);
+                            get1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            get2.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                            get3.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
                             //左右のジュエルと自身を消す
                             Destroy(gameObject);
                             Destroy(hit2.collider.gameObject);
@@ -293,7 +632,25 @@ public class Bullet : MonoBehaviour
 
             }
         }
-        
+        else if(collision.gameObject.tag == "Bullet_Point")
+        {
+            juelMode = true;
+        }
+
+
+
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Bullet_Point"||
+            collision.gameObject.tag == "Rail(right)" ||
+            collision.gameObject.tag == "Rail(left)" ||
+            collision.gameObject.tag == "Rail(down)" ||
+            collision.gameObject.tag == "Rail(down)(slow)" ||
+            collision.gameObject.tag == "Rail(up)")
+        {
+            juelMode = false;
+        }
     }
 }
 

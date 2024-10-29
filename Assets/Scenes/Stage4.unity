@@ -427,6 +427,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4470915629817040034, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470915629817040034, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9548011
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470915629817040034, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5152146804548919222, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
       propertyPath: gameGenerator
       value: 
@@ -514,6 +526,18 @@ PrefabInstance:
     - target: {fileID: 7277889957194460187, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119865536677080238, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119865536677080238, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119865536677080238, guid: 7fb68182847697f46ac400ea00db9388, type: 3}
+      propertyPath: m_Color.r
+      value: 0.97862744
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1455,6 +1479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab:
+  - {fileID: 4334701413000337186, guid: 436455a97b0fe3741af9886cf9ef5c6b, type: 3}
   - {fileID: 1748721844653493682, guid: 3cd247095df094d45bb18f6e7010ab13, type: 3}
   - {fileID: 1504964287210747409, guid: 82c61d79041b05944b4c628d32c24048, type: 3}
   - {fileID: 3079424045588693431, guid: 5074c88c844655e47bcf3c3846f10c05, type: 3}
@@ -1465,6 +1490,7 @@ MonoBehaviour:
   playerController:
   - {fileID: 83347590}
   juelPrefabs:
+  - {fileID: 3739465851540494416, guid: 436455a97b0fe3741af9886cf9ef5c6b, type: 3}
   - {fileID: 3429054592348906710, guid: 3cd247095df094d45bb18f6e7010ab13, type: 3}
   - {fileID: 3047130442980686329, guid: 82c61d79041b05944b4c628d32c24048, type: 3}
   - {fileID: 4162968277313547898, guid: 5074c88c844655e47bcf3c3846f10c05, type: 3}
@@ -2246,6 +2272,10 @@ PrefabInstance:
     - target: {fileID: 2980401957889518894, guid: b25713ec986e72440a2e7a1d602a604f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215741451345669514, guid: b25713ec986e72440a2e7a1d602a604f, type: 3}
+      propertyPath: m_Text
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3246,7 +3276,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07723729, y: -0.0841434}
+  m_Offset: {x: -0.16311422, y: -0.0841434}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3257,7 +3287,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8455254, y: 1.1682868}
+  m_Size: {x: 0.67377156, y: 1.1682868}
   m_EdgeRadius: 0
 --- !u!4 &1389972497
 Transform:
@@ -4106,10 +4136,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0.08949098
-    width: 1
-    height: 0.82101804
+    x: 0.125
+    y: 0
+    width: 0.75
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -4894,7 +4924,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07723729, y: -0.0841434}
+  m_Offset: {x: 0.15207937, y: -0.0841434}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4905,7 +4935,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8455254, y: 1.1682868}
+  m_Size: {x: 0.38689202, y: 1.1682868}
   m_EdgeRadius: 0
 --- !u!4 &2106355299
 Transform:

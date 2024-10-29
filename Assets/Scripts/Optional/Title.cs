@@ -32,6 +32,13 @@ public class Title : MonoBehaviour
 
     }
 
+    public void Ranking()
+    {
+        //画面遷移
+        Initiate.DoneFading();
+        Initiate.Fade("Ranking", Color.black, 0.5f);
+    }
+
     public void GameStart()
     {
         audioSource.PlayOneShot(start);

@@ -23,6 +23,11 @@ TagManager:
   - Enemy
   - Player2
   - PlayOut
+  - Black
+  - Bomb
+  - FxTemporaire
+  - Bullet_Point
+  - GameOutZone
   layers:
   - Default
   - TransparentFX

@@ -57,7 +57,7 @@ public class ObjCtrl : MonoBehaviour
                 tx = (t1.position.x - sPos.x) / wid; //横移動量(-1<tx<1)
                 ty = (t1.position.y - sPos.y) / hei; //縦移動量(-1<ty<1)
                 obj.transform.rotation = sRot;
-                obj.transform.Rotate(new Vector3(0, 0, -90 * tx), Space.World);
+                obj.transform.Rotate(new Vector3(0, 0, -360 * tx), Space.World);
             }
         }
 

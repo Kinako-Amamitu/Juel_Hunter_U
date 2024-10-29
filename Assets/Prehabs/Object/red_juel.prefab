@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: 941a63aa98db1af4ca4705d440a854c5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -129,12 +129,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 100
   destroyTime: 0
-  gameoverText: {fileID: 0}
-  gamescoreText: {fileID: 0}
   over: {fileID: 0}
   juel: {fileID: 9149540444684222356}
   gameGenerator: {fileID: 0}
-  sound2: {fileID: 8300000, guid: 12931ad9da0ed69479698296f0280bef, type: 3}
+  explosionPrefab: {fileID: 0}
+  getPrefab: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
 --- !u!58 &-2349363693597302923
 CircleCollider2D:
   m_ObjectHideFlags: 0

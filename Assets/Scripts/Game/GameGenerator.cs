@@ -15,6 +15,7 @@ public class GameGenerator : MonoBehaviour
     private int userID = 0;  //自分のユーザーID
     private int stageID = 0; //ステージID
     private int score = 0; //スコア
+    private int bombFlag = 0; //ボム生成確定フラグ
 
     [SerializeField] List<Bullet> bulletPrefab;     // 弾のプレファブ
     [SerializeField] private Transform[] firePoint;     // 発射ポイント
@@ -71,6 +72,7 @@ public class GameGenerator : MonoBehaviour
     public AudioClip pageDown; //メニューを閉じる
     public AudioClip select; //汎用決定音
     public AudioClip cancel; //汎用キャンセル音
+    public AudioClip explosion; //爆発音
     AudioSource audioSource; //SE入力にオーディオソースを使用する
 
     //private float timer = 0f;       // タイマー
@@ -92,8 +94,15 @@ public class GameGenerator : MonoBehaviour
         //AudioComponentを取得
         audioSource = GetComponent<AudioSource>();
 
-        //クリア条件初期化
-        target1.text = juelRequired.ToString();
+        if (target1 != null)
+        {
+            //クリア条件初期化
+            target1.text = juelRequired.ToString();
+        }
+        else
+        {
+
+        }
 
         //初弾のジュエルを抽選
         for (int i = 0; i < playerNum; i++)
@@ -128,15 +137,27 @@ public class GameGenerator : MonoBehaviour
         if (gameTimer <= 0)
         {
 
+            if(currentStage==11||currentStage==12)
+            {
+                GameSet();
 
+                // Updateに入らないようにする
+                enabled = false;
 
-            GameOver();
+                // この時点でUpdateから抜ける
+                return;
+            }
+            else 
+            {
+                GameOver();
 
-            // Updateに入らないようにする
-            enabled = false;
+                // Updateに入らないようにする
+                enabled = false;
 
-            ;            // この時点でUpdateから抜ける
-            return;
+                // この時点でUpdateから抜ける
+                return;
+            }
+           
         }
 
         for (int i = 0; i < playerNum; i++)
@@ -149,7 +170,7 @@ public class GameGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// 弾の生成
+    /// 弾の発射
     /// </summary>
     public void FireBullet(int Num)
     {
@@ -195,7 +216,15 @@ public class GameGenerator : MonoBehaviour
     {
         audioSource.PlayOneShot(sound2);
         juelRequired -= target;
-        target1.text = juelRequired.ToString();
+        if(target1==null)
+        {
+
+        }
+        else
+        {
+            target1.text = juelRequired.ToString();
+        }
+        
     }
 
     /// <summary>
@@ -289,6 +318,25 @@ public class GameGenerator : MonoBehaviour
         Result();
     }
 
+    //爆発音
+    public void Explosion()
+    {
+        audioSource.PlayOneShot(explosion);
+    }
+    public void GameSet()
+    {
+        gameoverText.text = "GameSet!!";
+        gameoverPanel.SetActive(true);
+
+        GameObject.Find("Player").GetComponent<ObjCtrl>().GameModeChange();
+
+        if (playerNum == 2)
+        {
+            GameObject.Find("Player2").GetComponent<ObjCtrl>().GameModeChange();
+        }
+        Time.timeScale = 0;
+    }
+
     public void Result()
     {
         Time.timeScale = 1;
@@ -317,10 +365,18 @@ public class GameGenerator : MonoBehaviour
 
     private IEnumerator UpdateBullet(int Num)
     {
+        bombFlag++;
         yield return new WaitForSeconds(1.0f);
 
         // 色ランダム
         int rnd = UnityEngine.Random.Range(0, juelPrefabs.Count);
+
+        //3回のみボム確定
+        if (bombFlag==3|| bombFlag == 7|| bombFlag == 13)
+        {
+            rnd = 0;
+        }
+      
 
         // 弾の生成
         bullet[Num] = Instantiate(bulletPrefab[rnd], firePoint[Num].position + new Vector3(0, 0, -1.0f), Quaternion.identity);
