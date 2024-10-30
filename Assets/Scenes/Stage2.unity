@@ -1333,7 +1333,7 @@ MonoBehaviour:
   - {fileID: 9169416433727246376, guid: 8c61aa8a906b80543b98ccaaa54ec89f, type: 3}
   outZone: {fileID: 562567609}
   gameTimer: 100
-  juelRequired: 12
+  juelRequired: 21
   playerNum: 1
   deleteCount: 3
   isgameOver: 0
@@ -1353,6 +1353,7 @@ MonoBehaviour:
   pageDown: {fileID: 8300000, guid: ae106172271c2eb43bf9ca1696b3f63e, type: 3}
   select: {fileID: 8300000, guid: 7bd590812d7901a40b3a5a9e6d4bb637, type: 3}
   cancel: {fileID: 8300000, guid: a7e18f12f9e0ec140b9ca4b142a978b7, type: 3}
+  explosion: {fileID: 8300000, guid: cf54be80aaa8b7643a5c117876704c15, type: 3}
 --- !u!4 &432465263
 Transform:
   m_ObjectHideFlags: 0
@@ -1567,7 +1568,7 @@ GameObject:
   - component: {fileID: 562567611}
   m_Layer: 0
   m_Name: OUTzone
-  m_TagString: Out
+  m_TagString: Black_hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1613,8 +1614,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 73fef5ab7a479e74eaa6ab48f0dc2cc8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 23d4b48840e409547a4aac836e361ef8, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1633,8 +1634,8 @@ Transform:
   m_GameObject: {fileID: 562567607}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.33, y: -3.58, z: 0}
-  m_LocalScale: {x: 0.2488605, y: 0.21673806, z: 1}
+  m_LocalPosition: {x: -2.05, y: -3.6, z: 0}
+  m_LocalScale: {x: 0.051381286, y: 0.05097467, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1831,10 +1832,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.125
-    y: 0
-    width: 0.75
-    height: 1
+    x: 0
+    y: 0.00024986267
+    width: 1
+    height: 0.9995003
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

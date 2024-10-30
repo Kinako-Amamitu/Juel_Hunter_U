@@ -1531,8 +1531,8 @@ MonoBehaviour:
   - {fileID: 9149540444684222356, guid: bdb1840ce6ffff14e9ae8bafa2285e2d, type: 3}
   - {fileID: 9169416433727246376, guid: 8c61aa8a906b80543b98ccaaa54ec89f, type: 3}
   outZone: {fileID: 562567609}
-  gameTimer: 150
-  juelRequired: 18
+  gameTimer: 200
+  juelRequired: 39
   playerNum: 1
   deleteCount: 3
   isgameOver: 0
@@ -1552,6 +1552,7 @@ MonoBehaviour:
   pageDown: {fileID: 8300000, guid: ae106172271c2eb43bf9ca1696b3f63e, type: 3}
   select: {fileID: 8300000, guid: 7bd590812d7901a40b3a5a9e6d4bb637, type: 3}
   cancel: {fileID: 8300000, guid: a7e18f12f9e0ec140b9ca4b142a978b7, type: 3}
+  explosion: {fileID: 8300000, guid: cf54be80aaa8b7643a5c117876704c15, type: 3}
 --- !u!4 &432465263
 Transform:
   m_ObjectHideFlags: 0
@@ -5349,10 +5350,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.125
-    y: 0
-    width: 0.75
-    height: 1
+    x: 0
+    y: 0.00024986267
+    width: 1
+    height: 0.9995003
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60

@@ -1149,7 +1149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &585372808
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1202,7 +1202,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: EXTRA 1
+  m_Text: 3 min MODE
 --- !u!222 &585372810
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1596,6 +1596,8 @@ MonoBehaviour:
   - {fileID: 26321859}
   - {fileID: 437759019}
   - {fileID: 137577180}
+  - {fileID: 617831813}
+  - {fileID: 1626356854}
   stageEnter: {fileID: 8300000, guid: e3e8abb61110a6e4cbc25e0fef118555, type: 3}
 --- !u!4 &741787135
 Transform:
@@ -2101,9 +2103,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.125
+    x: 0
     y: 0
-    width: 0.75
+    width: 1
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -2452,7 +2454,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: EXTRA 2
+  m_Text: 5 min MODE
 --- !u!222 &1613156684
 CanvasRenderer:
   m_ObjectHideFlags: 0

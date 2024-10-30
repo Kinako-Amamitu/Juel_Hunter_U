@@ -63,6 +63,12 @@ public class GameGenerator : MonoBehaviour
     [SerializeField] GameObject posemenuPanel;
     [SerializeField] GameObject gameoverPanel;
 
+    AudioSource audioSource; //BGM,SE入力にオーディオソースを使用する
+
+    //BGM
+    private GameObject ScoreAttack;     //スコアアタック用スタートBGM
+    private GameObject ScoreAttackLoop; //スコアアタック用ループBGM
+
     //SE
     public AudioClip sound1; //発射音
     public AudioClip sound2; //ジュエル削除音
@@ -73,7 +79,7 @@ public class GameGenerator : MonoBehaviour
     public AudioClip select; //汎用決定音
     public AudioClip cancel; //汎用キャンセル音
     public AudioClip explosion; //爆発音
-    AudioSource audioSource; //SE入力にオーディオソースを使用する
+   
 
     //private float timer = 0f;       // タイマー
 
@@ -93,6 +99,12 @@ public class GameGenerator : MonoBehaviour
 
         //AudioComponentを取得
         audioSource = GetComponent<AudioSource>();
+
+        ScoreAttack = GameObject.Find("BGM");
+        ScoreAttackLoop = GameObject.Find("LoopBGM");
+
+        //DelayMethodを80秒後に呼び出す
+        Invoke(nameof(BGMOver), 80.0f);
 
         if (target1 != null)
         {
@@ -169,6 +181,13 @@ public class GameGenerator : MonoBehaviour
         }
     }
 
+    public void BGMOver()
+    {
+        audioSource = ScoreAttack.GetComponent<AudioSource>();
+        audioSource.Stop();
+        audioSource = ScoreAttackLoop.GetComponent<AudioSource>();
+        audioSource.Play();
+    }
     /// <summary>
     /// 弾の発射
     /// </summary>

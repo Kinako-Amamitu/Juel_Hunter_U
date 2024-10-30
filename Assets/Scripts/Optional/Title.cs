@@ -7,6 +7,7 @@ public class Title : MonoBehaviour
 {
 
     public AudioClip start; //ゲームスタート音
+    public AudioClip ranking; //ランキングスタート音
     AudioSource audioSource; //SE入力にオーディオソースを使用する
 
     // Start is called before the first frame update
@@ -34,6 +35,7 @@ public class Title : MonoBehaviour
 
     public void Ranking()
     {
+        audioSource.PlayOneShot(ranking);
         //画面遷移
         Initiate.DoneFading();
         Initiate.Fade("Ranking", Color.black, 0.5f);

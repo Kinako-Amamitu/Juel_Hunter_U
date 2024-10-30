@@ -17,7 +17,10 @@ public class Ranking : MonoBehaviour
     [SerializeField] Text[] ranking;
     [SerializeField] Text[] rankingCurrent;
 
-    
+    AudioSource audioSource; //BGM,SE入力にオーディオソースを使用する
+
+    public AudioClip select; //汎用決定音
+    public AudioClip cancel; //汎用キャンセル音
 
     ////ランキング表示用のテキストプレハブ
     //[SerializeField] GameObject rankItemPrefab;
@@ -121,6 +124,8 @@ public class Ranking : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //AudioComponentを取得
+        audioSource = GetComponent<AudioSource>();
 
         currentStage = GameGenerator.Stageset();
         if (currentStage == 0)
@@ -189,7 +194,7 @@ public class Ranking : MonoBehaviour
 
     public void StageSelect()
     {
- 
+        audioSource.PlayOneShot(select);
             Initiate.DoneFading();
 
             Initiate.Fade("StageSelect", Color.black, 1.0f);
@@ -197,6 +202,7 @@ public class Ranking : MonoBehaviour
 
     public void Title()
     {
+        audioSource.PlayOneShot(cancel);
         Initiate.DoneFading();
 
         Initiate.Fade("Title", Color.black, 1.0f);
