@@ -5,12 +5,12 @@ using UnityEngine;
 public class SaveData 
 {
 
-    public string authToken { get; set; }
-    public string userName { get; set; }
-    public int userID { get; set; }
+    public string authToken { get; set; } //Apiトークン
+    public string userName { get; set; } //ユーザ名
+    public int userID { get; set; } //ユーザID
 
-    public int stageClearNumber { get; set; }
+    public int stageClearNumber { get; set; } //そのユーザーのステージクリア状況
 
-    public int stage_ID { get; set; }
-    public int score { get; set; }
+    public int stage_ID { get; set; } //ステージのID
+    public int score { get; set; } //スコア
 }

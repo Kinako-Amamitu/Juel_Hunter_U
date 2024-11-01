@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StageGenelater : MonoBehaviour
 {
+    //ステージリスト
     [SerializeField] GameObject[] stageList;
 
     //se
@@ -17,24 +18,26 @@ public class StageGenelater : MonoBehaviour
         //AudioComponentを取得
         audioSource = GetComponent<AudioSource>();
 
+        //前ステージクリアで次のステージを解放させる
         for (int i=0;i<NetworkManager.Instance.stageCullentClear;i++)
         {
             stageList[i].SetActive(true);
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// ステージをせんたくする
+    /// </summary>
+    /// <param name="stageNum"></param>
     public void StageSelector(int stageNum)
     {
         audioSource.PlayOneShot(stageEnter);
         GameGenerator.UpdateStageScene(stageNum);
     }
 
+    /// <summary>
+    /// タイトルへ
+    /// </summary>
     public void Title()
     {
         audioSource.PlayOneShot(stageEnter);

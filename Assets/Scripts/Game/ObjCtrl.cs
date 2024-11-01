@@ -3,8 +3,10 @@ using System.Collections;
 
 public class ObjCtrl : MonoBehaviour
 {
+    //ゲームオブジェクトの変数
     public GameObject obj;
 
+    //クラス継承
     GameGenerator gameGenerator;
 
     //回転用
@@ -18,10 +20,11 @@ public class ObjCtrl : MonoBehaviour
 
     void Start()
     {
-        wid = Screen.width;
-        hei = Screen.height;
-        diag = Mathf.Sqrt(Mathf.Pow(wid, 2) + Mathf.Pow(hei, 2));
+        wid = Screen.width;//横
+        hei = Screen.height;//縦
+        diag = Mathf.Sqrt(Mathf.Pow(wid, 2) + Mathf.Pow(hei, 2));//スワイプ時の力
 
+        //ゲームジェネレーターを探す
         gameGenerator = GameObject.Find("GameGenerator").GetComponent<GameGenerator>();
     }
 
@@ -29,18 +32,18 @@ public class ObjCtrl : MonoBehaviour
     {
        
         if (isgameMode)
-        {
+        {//ゲームの状態
             return;
         }
 
         if (gameGenerator.isgameOver == true)
-        {
+        {//ゲームオーバー時
             return;
         }
 
 
         if (Input.touchCount > 0)
-        {
+        {//タッチ入力されていたら
             
             //回転
             Touch t1 = Input.GetTouch(0);
@@ -48,12 +51,12 @@ public class ObjCtrl : MonoBehaviour
            
 
             if (t1.phase == TouchPhase.Began)
-            {
+            {//タッチ
                 sPos = t1.position;
                 sRot = obj.transform.rotation;
             }
             else if (t1.phase == TouchPhase.Moved || t1.phase == TouchPhase.Stationary)
-            {
+            {//スワイプ
                 tx = (t1.position.x - sPos.x) / wid; //横移動量(-1<tx<1)
                 ty = (t1.position.y - sPos.y) / hei; //縦移動量(-1<ty<1)
                 obj.transform.rotation = sRot;
@@ -63,6 +66,9 @@ public class ObjCtrl : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// ゲームの状態更新
+    /// </summary>
     public void GameModeChange()
     {
         if(isgameMode==false)

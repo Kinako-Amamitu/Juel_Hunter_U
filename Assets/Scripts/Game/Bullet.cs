@@ -152,7 +152,7 @@ public class Bullet : MonoBehaviour
                 if(gameObject.tag=="Black")
                 {
                     if (hit.collider.tag != "Black"&&
-                        hit.collider.tag == "Rail(right)"&&
+                        hit.collider.tag != "Rail(right)"&&
                         hit.collider.tag != "Rail(down)" && 
                         hit.collider.tag != "Rail(up)" &&
                         hit.collider.tag != "Rail(down)" &&
@@ -171,7 +171,7 @@ public class Bullet : MonoBehaviour
                         if (hit2.collider)
                         {
                             if (hit.collider.tag != "Black" &&
-                                hit.collider.tag == "Rail(right)" &&
+                                hit.collider.tag != "Rail(right)" &&
                                  hit.collider.tag != "Rail(down)" &&
                                  hit.collider.tag != "Rail(up)" &&
                                  hit.collider.tag != "Rail(down)" &&
@@ -251,7 +251,7 @@ public class Bullet : MonoBehaviour
                 if (gameObject.tag == "Black")
                 {
                     if (hit.collider.tag != "Black" &&
-                        hit.collider.tag == "Rail(right)" &&
+                        hit.collider.tag != "Rail(right)" &&
                    hit.collider.tag != "Rail(down)" &&
                    hit.collider.tag != "Rail(up)" &&
                    hit.collider.tag != "Rail(down)" &&
@@ -270,7 +270,7 @@ public class Bullet : MonoBehaviour
                         if (hit2.collider)
                         {
                             if (hit.collider.tag != "Black" &&
-                                hit.collider.tag == "Rail(right)" &&
+                                hit.collider.tag != "Rail(right)" &&
                                 hit.collider.tag != "Rail(down)" &&
                                  hit.collider.tag != "Rail(up)" &&
                                  hit.collider.tag != "Rail(down)" &&
@@ -350,7 +350,7 @@ public class Bullet : MonoBehaviour
                 if (gameObject.tag == "Black")
                 {
                     if (hit.collider.tag != "Black" &&
-                        hit.collider.tag == "Rail(right)" &&
+                        hit.collider.tag != "Rail(right)" &&
                    hit.collider.tag != "Rail(down)" &&
                    hit.collider.tag != "Rail(up)" &&
                    hit.collider.tag != "Rail(down)" &&
@@ -369,7 +369,7 @@ public class Bullet : MonoBehaviour
                         if (hit2.collider)
                         {
                             if (hit.collider.tag != "Black" &&
-                                hit.collider.tag == "Rail(right)" &&
+                                hit.collider.tag != "Rail(right)" &&
                                  hit.collider.tag != "Rail(down)" &&
                                 hit.collider.tag != "Rail(up)" &&
                                 hit.collider.tag != "Rail(down)" &&
@@ -449,7 +449,7 @@ public class Bullet : MonoBehaviour
                 if (gameObject.tag == "Black")
                 {
                     if (hit.collider.tag != "Black" &&
-                        hit.collider.tag == "Rail(right)" &&
+                        hit.collider.tag != "Rail(right)" &&
                    hit.collider.tag != "Rail(down)" &&
                    hit.collider.tag != "Rail(up)" &&
                    hit.collider.tag != "Rail(down)" &&
@@ -468,7 +468,7 @@ public class Bullet : MonoBehaviour
                         if (hit2.collider)
                         {
                             if (hit.collider.tag != "Black" &&
-                                hit.collider.tag == "Rail(right)" &&
+                                hit.collider.tag != "Rail(right)" &&
                                 hit.collider.tag != "Rail(down)" &&
                                 hit.collider.tag != "Rail(up)" &&
                                 hit.collider.tag != "Rail(down)" &&
@@ -549,7 +549,7 @@ public class Bullet : MonoBehaviour
                 if (gameObject.tag == "Black")
                 {
                     if (hit.collider.tag != "Black" &&
-                        hit.collider.tag == "Rail(right)" &&
+                        hit.collider.tag != "Rail(right)" &&
                    hit.collider.tag != "Rail(down)" &&
                    hit.collider.tag != "Rail(up)" &&
                    hit.collider.tag != "Rail(down)" &&
@@ -568,7 +568,7 @@ public class Bullet : MonoBehaviour
                         if (hit2.collider)
                         {
                             if (hit.collider.tag != "Black" &&
-                                hit.collider.tag == "Rail(right)" &&
+                                hit.collider.tag != "Rail(right)" &&
                                  hit.collider.tag != "Rail(down)" &&
                                 hit.collider.tag != "Rail(up)" &&
                                  hit.collider.tag != "Rail(down)" &&

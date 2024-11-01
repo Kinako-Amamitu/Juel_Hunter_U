@@ -135,6 +135,10 @@ public class NetworkManager : MonoBehaviour
         responce?.Invoke(request.result == UnityWebRequest.Result.Success);
     }
 
+    /// <summary>
+    /// ユーザーデータの読み込み
+    /// </summary>
+    /// <returns></returns>
     public bool LoadUserData()
     {
         if (!File.Exists(Application.persistentDataPath + "/saveData.json"))
@@ -167,6 +171,10 @@ public class NetworkManager : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// ステージクリア状況送信
+    /// </summary>
+    /// <param name="number"></param>
     public void StageProgress(int number)
     {
         if(number > stageClearNumber)
@@ -176,6 +184,13 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// スコア送信
+    /// </summary>
+    /// <param name="score"></param>
+    /// <param name="stage_id"></param>
+    /// <param name="result"></param>
+    /// <returns></returns>
     public IEnumerator RegistScore(int score,int stage_id,Action<RegistRankingResponse> result)
     {
         //サーバーに送信するオブジェクトを作成

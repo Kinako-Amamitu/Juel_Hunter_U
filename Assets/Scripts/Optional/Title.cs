@@ -17,22 +17,9 @@ public class Title : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //タッチしたとき
-        /*if (Input.touchCount > 0)
-        {
-            Touch t1 = Input.GetTouch(0);
-            if (t1.phase == TouchPhase.Began)
-            {
-                
-            }
-        }
-        */
-
-    }
-
+    /// <summary>
+    /// ランキングへ
+    /// </summary>
     public void Ranking()
     {
         audioSource.PlayOneShot(ranking);
@@ -41,6 +28,9 @@ public class Title : MonoBehaviour
         Initiate.Fade("Ranking", Color.black, 0.5f);
     }
 
+    /// <summary>
+    /// ゲーム開始
+    /// </summary>
     public void GameStart()
     {
         audioSource.PlayOneShot(start);
@@ -64,7 +54,9 @@ public class Title : MonoBehaviour
         };
     }
 
-    //ゲーム終了
+    /// <summary>
+    /// ゲーム終了
+    /// </summary>
     public void EndGame()
     {
 

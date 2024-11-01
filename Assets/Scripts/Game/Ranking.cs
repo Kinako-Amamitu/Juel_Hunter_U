@@ -9,40 +9,42 @@ using UnityEngine.UI;
 
 public class Ranking : MonoBehaviour
 {
-
+    //ステージの情報
     int currentStage;
-    string rankingScore;
 
-    [SerializeField] Text stage;
-    [SerializeField] Text[] ranking;
-    [SerializeField] Text[] rankingCurrent;
+    /// <summary>
+    /// Unityアタッチ変数
+    /// </summary>
+    [SerializeField] Text stage; //ステージ
+    [SerializeField] Text[] ranking; //ランキング(スコア)
+    [SerializeField] Text[] rankingCurrent; //ランキングの順位
 
+    /// <summary>
+    /// 音関連
+    /// </summary>
     AudioSource audioSource; //BGM,SE入力にオーディオソースを使用する
 
     public AudioClip select; //汎用決定音
     public AudioClip cancel; //汎用キャンセル音
 
-    ////ランキング表示用のテキストプレハブ
-    //[SerializeField] GameObject rankItemPrefab;
 
-    ////ランキングテキストの親のゲームオブジェクト
-    //[SerializeField] GameObject parentGameObject;
-
-
+    /// <summary>
+    /// ランキングを読み込む
+    /// </summary>
     public void LordRanking()
     {
-      
+        //データベースからスコア取得
         StartCoroutine(NetworkManager.Instance.GetScore(currentStage, result =>
         {
             for(int i=0;i<ranking.Length;i++)
-            {
+            {//ランキングの数だけ
                 if(result.Length<=i)
-                {
+                {//データ数がループ数を超えたら
                     break;
                 }
 
                 if (i==0)
-                {
+                {//1位
                     // 色を指定
                     rankingCurrent[i].color = new Color(1.0f, 0.92f, 0.016f, 1.0f);
                     rankingCurrent[i].text = string.Format("1st");
@@ -51,7 +53,7 @@ public class Ranking : MonoBehaviour
                     ranking[i].text += string.Format("{0}",result[i].Score);
                 }
                 else if (i == 1)
-                {
+                {//2位
                     // 色を指定
                     rankingCurrent[i].color = new Color(0.5f, 0.5f, 0.5f, 1.0f);
                     rankingCurrent[i].text = string.Format("2nd");
@@ -60,7 +62,7 @@ public class Ranking : MonoBehaviour
                     ranking[i].text += string.Format("{0}", result[i].Score);
                 }
                 else if (i == 2)
-                {
+                {//3位
                     // 色を指定
                     rankingCurrent[i].color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
                     rankingCurrent[i].text = string.Format("3rd");
@@ -69,7 +71,7 @@ public class Ranking : MonoBehaviour
                     ranking[i].text += string.Format("{0}", result[i].Score);
                 }
                 else
-                {
+                {//それ以外
                     // 色を指定
                     rankingCurrent[i].color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
                     rankingCurrent[i].text = string.Format("{0}th",i+1);
@@ -83,50 +85,12 @@ public class Ranking : MonoBehaviour
         }));
     }
 
-
-    //IEnumerator GetUser()
-    //{
-    //    string url = hostName + "/api/ranking/index";
-
-    //    UnityWebRequest request = UnityWebRequest.Get(url);
-    //    request.SetRequestHeader("x-functions-key", apiKey);
-    //    yield return request.SendWebRequest();
-
-    //    if (request.result == UnityWebRequest.Result.Success)
-    //    {//成功した場合
-    //        string json = request.downloadHandler.text;
-
-    //        //JSONからデシリアライズ
-    //        var userDatas = JsonConvert.DeserializeObject<Ranking_Data[]>(json);
-
-    //        //テキストを設定
-    //        for (int i = 0; i < userDatas.Length; i++)
-    //        {
-    //            GameObject textObj = Instantiate(rankItemPrefab,
-    //             new Vector3(0, 0, 0),
-    //             Quaternion.identity,
-    //             parentGameObject.transform);
-    //            textObj.GetComponent<Text>().text = string.Format("{0}",userDatas[i].Score); //APIから取得したスコアにしたい
-    //        }
-
-    //    }
-    //    else
-    //    {//失敗した場合
-    //        GameObject textObj = Instantiate(rankItemPrefab,
-    //        new Vector3(0, 0, 0),
-    //        Quaternion.identity,
-    //        parentGameObject.transform);
-    //        textObj.GetComponent<Text>().text = "エラーメッセージ!!"; //APIから取得した名前・スコアにしたい
-
-    //    }
-    //}
-
-    // Start is called before the first frame update
     void Start()
     {
         //AudioComponentを取得
         audioSource = GetComponent<AudioSource>();
 
+        //ランキング表示してるステージを表示
         currentStage = GameGenerator.Stageset();
         if (currentStage == 0)
         {
@@ -138,21 +102,17 @@ public class Ranking : MonoBehaviour
             stage.text = string.Format("STAGE: {0}", currentStage);
         }
         
-
+        //ランキングを読み込む
         LordRanking();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-
-    }
-
+    /// <summary>
+    /// 前ステージのランキング見る
+    /// </summary>
     public void RankingDown()
     {
         if(currentStage==1)
-        {
+        {//ステージ1の場合
             currentStage += 11;
         }
         else
@@ -162,19 +122,23 @@ public class Ranking : MonoBehaviour
         stage.text = string.Format("STAGE: {0}", currentStage);
 
         for (int i = 0; i < ranking.Length; i++)
-        {
+        {//前のランキングは消しておく
             rankingCurrent[i].text = null;
             ranking[i].text ="";
         }
-            LordRanking();
 
-        
+        //ランキングを読み込む
+        LordRanking();
+
     }
 
+    /// <summary>
+    /// 次ステージのランキングを見る
+    /// </summary>
     public void RankingUp()
     {
         if(currentStage==12)
-        {
+        {//ステージ１２の場合
             currentStage -= 11;
         }
         else
@@ -183,15 +147,18 @@ public class Ranking : MonoBehaviour
         }
         stage.text = string.Format("STAGE: {0}", currentStage);
         for (int i = 0; i < ranking.Length; i++)
-        {
+        {//前のランキングは消しておく
             rankingCurrent[i].text = null;
             ranking[i].text = "";
         }
-        LordRanking();
 
-        
+        //ランキングを読み込む
+        LordRanking();
     }
 
+    /// <summary>
+    /// ステージセレクトへ
+    /// </summary>
     public void StageSelect()
     {
         audioSource.PlayOneShot(select);
@@ -200,6 +167,9 @@ public class Ranking : MonoBehaviour
             Initiate.Fade("StageSelect", Color.black, 1.0f);
     }
 
+    /// <summary>
+    /// タイトルへ
+    /// </summary>
     public void Title()
     {
         audioSource.PlayOneShot(cancel);
