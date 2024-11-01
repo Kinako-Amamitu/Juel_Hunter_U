@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] GameGenerator gameGenerator;
     [SerializeField] private GameObject explosionPrefab; //爆発エフェクト
     [SerializeField] private GameObject getPrefab; //取得エフェクト
+    [SerializeField] private GameObject deleat; //発射しっぱいエフェクト
     //PlayerController playerController;
 
 
@@ -75,6 +76,9 @@ public class Bullet : MonoBehaviour
             }
             else
             {
+                GameObject explosion = Instantiate(deleat, gameObject.transform.position, Quaternion.identity);
+                explosion.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                gameGenerator.FaildShoot();
                 Destroy(gameObject);
             }
         }
@@ -100,6 +104,7 @@ public class Bullet : MonoBehaviour
             {
                 Destroy(hit.collider.gameObject);
                 gameGenerator.AddScore(50);
+                gameGenerator.Quest(1);
             }
         }
         GameObject explosion = Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
@@ -153,14 +158,11 @@ public class Bullet : MonoBehaviour
                 {
                     if (hit.collider.tag != "Black"&&
                         hit.collider.tag != "Rail(right)"&&
-                        hit.collider.tag != "Rail(down)" && 
-                        hit.collider.tag != "Rail(up)" &&
-                        hit.collider.tag != "Rail(down)" &&
-                        hit.collider.tag != "Rail(down)(slow)" &&
-                        hit.collider.tag != "Untagged"&&
-                        hit.collider.tag != "Black_hole"&&
-                        hit.collider.tag != "Black_hole"&&
-                        hit.collider.tag != "Bomb")
+                        hit.collider.tag=="Red" ||
+                        hit.collider.tag=="Blue" ||
+                        hit.collider.tag=="Green" ||
+                        hit.collider.tag=="Purple" ||
+                        hit.collider.tag=="Yellow")
                     {
                         isSameright = true;
 
@@ -170,16 +172,13 @@ public class Bullet : MonoBehaviour
 
                         if (hit2.collider)
                         {
-                            if (hit.collider.tag != "Black" &&
-                                hit.collider.tag != "Rail(right)" &&
-                                 hit.collider.tag != "Rail(down)" &&
-                                 hit.collider.tag != "Rail(up)" &&
-                                 hit.collider.tag != "Rail(down)" &&
-                                    hit.collider.tag != "Rail(down)(slow)" &&
-                                    hit.collider.tag != "Untagged" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Bomb")
+                            if (hit2.collider.tag != "Black" &&
+                                hit2.collider.tag != "Rail(right)" &&
+                                hit2.collider.tag == "Red" ||
+                                hit2.collider.tag == "Blue" ||
+                                hit2.collider.tag == "Green" ||
+                                hit2.collider.tag == "Purple" ||
+                                hit2.collider.tag == "Yellow")
                             {
                                 //取得エフェクト
                                 GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
@@ -251,15 +250,12 @@ public class Bullet : MonoBehaviour
                 if (gameObject.tag == "Black")
                 {
                     if (hit.collider.tag != "Black" &&
-                        hit.collider.tag != "Rail(right)" &&
-                   hit.collider.tag != "Rail(down)" &&
-                   hit.collider.tag != "Rail(up)" &&
-                   hit.collider.tag != "Rail(down)" &&
-                   hit.collider.tag != "Rail(down)(slow)" &&
-                   hit.collider.tag != "Untagged" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Bomb")
+                        hit.collider.tag != "Rail(up)" &&
+                        hit.collider.tag == "Red" ||
+                        hit.collider.tag == "Blue" ||
+                        hit.collider.tag == "Green" ||
+                        hit.collider.tag == "Purple" ||
+                        hit.collider.tag == "Yellow")
                     {
                         isSameright = true;
 
@@ -269,16 +265,13 @@ public class Bullet : MonoBehaviour
 
                         if (hit2.collider)
                         {
-                            if (hit.collider.tag != "Black" &&
-                                hit.collider.tag != "Rail(right)" &&
-                                hit.collider.tag != "Rail(down)" &&
-                                 hit.collider.tag != "Rail(up)" &&
-                                 hit.collider.tag != "Rail(down)" &&
-                                    hit.collider.tag != "Rail(down)(slow)" &&
-                                    hit.collider.tag != "Untagged" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Bomb")
+                            if (hit2.collider.tag != "Black" &&
+                                hit2.collider.tag != "Rail(up)" &&
+                                hit2.collider.tag == "Red" ||
+                                hit2.collider.tag == "Blue" ||
+                                hit2.collider.tag == "Green" ||
+                                hit2.collider.tag == "Purple" ||
+                                hit2.collider.tag == "Yellow")
                             {
                                 //取得エフェクト
                                 GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
@@ -350,15 +343,12 @@ public class Bullet : MonoBehaviour
                 if (gameObject.tag == "Black")
                 {
                     if (hit.collider.tag != "Black" &&
-                        hit.collider.tag != "Rail(right)" &&
-                   hit.collider.tag != "Rail(down)" &&
-                   hit.collider.tag != "Rail(up)" &&
-                   hit.collider.tag != "Rail(down)" &&
-                   hit.collider.tag != "Rail(down)(slow)" &&
-                   hit.collider.tag != "Untagged" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Bomb")
+                        hit.collider.tag != "Rail(down)" &&
+                        hit.collider.tag == "Red" ||
+                        hit.collider.tag == "Blue" ||
+                        hit.collider.tag == "Green" ||
+                        hit.collider.tag == "Purple" ||
+                        hit.collider.tag == "Yellow")
                     {
                         isSameright = true;
 
@@ -368,16 +358,13 @@ public class Bullet : MonoBehaviour
 
                         if (hit2.collider)
                         {
-                            if (hit.collider.tag != "Black" &&
-                                hit.collider.tag != "Rail(right)" &&
-                                 hit.collider.tag != "Rail(down)" &&
-                                hit.collider.tag != "Rail(up)" &&
-                                hit.collider.tag != "Rail(down)" &&
-                                hit.collider.tag != "Rail(down)(slow)" &&
-                                hit.collider.tag != "Untagged" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Bomb")
+                            if (hit2.collider.tag != "Black" &&
+                                hit2.collider.tag != "Rail(down)" &&
+                                hit2.collider.tag == "Red" ||
+                                hit2.collider.tag == "Blue" ||
+                                hit2.collider.tag == "Green" ||
+                                hit2.collider.tag == "Purple" ||
+                                hit2.collider.tag == "Yellow")
                             {
                                 //取得エフェクト
                                 GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
@@ -449,15 +436,12 @@ public class Bullet : MonoBehaviour
                 if (gameObject.tag == "Black")
                 {
                     if (hit.collider.tag != "Black" &&
-                        hit.collider.tag != "Rail(right)" &&
-                   hit.collider.tag != "Rail(down)" &&
-                   hit.collider.tag != "Rail(up)" &&
-                   hit.collider.tag != "Rail(down)" &&
-                   hit.collider.tag != "Rail(down)(slow)" &&
-                   hit.collider.tag != "Untagged" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Bomb")
+                        hit.collider.tag != "Rail(down)(slow)" &&
+                        hit.collider.tag == "Red" ||
+                        hit.collider.tag == "Blue" ||
+                        hit.collider.tag == "Green" ||
+                        hit.collider.tag == "Purple" ||
+                        hit.collider.tag == "Yellow")
                     {
                         isSameright = true;
 
@@ -467,16 +451,13 @@ public class Bullet : MonoBehaviour
 
                         if (hit2.collider)
                         {
-                            if (hit.collider.tag != "Black" &&
-                                hit.collider.tag != "Rail(right)" &&
-                                hit.collider.tag != "Rail(down)" &&
-                                hit.collider.tag != "Rail(up)" &&
-                                hit.collider.tag != "Rail(down)" &&
-                                hit.collider.tag != "Rail(down)(slow)" &&
-                                hit.collider.tag != "Untagged" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Bomb")
+                            if (hit2.collider.tag != "Black" &&
+                                hit2.collider.tag != "Rail(down)(slow)" &&
+                                hit2.collider.tag == "Red" ||
+                                hit2.collider.tag == "Blue" ||
+                                hit2.collider.tag == "Green" ||
+                                hit2.collider.tag == "Purple" ||
+                                hit2.collider.tag == "Yellow")
                             {
                                 //取得エフェクト
                                 GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);
@@ -549,15 +530,12 @@ public class Bullet : MonoBehaviour
                 if (gameObject.tag == "Black")
                 {
                     if (hit.collider.tag != "Black" &&
-                        hit.collider.tag != "Rail(right)" &&
-                   hit.collider.tag != "Rail(down)" &&
-                   hit.collider.tag != "Rail(up)" &&
-                   hit.collider.tag != "Rail(down)" &&
-                   hit.collider.tag != "Rail(down)(slow)" &&
-                   hit.collider.tag != "Untagged" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Bomb")
+                        hit.collider.tag != "Rail(left)" &&
+                        hit.collider.tag == "Red" ||
+                        hit.collider.tag == "Blue" ||
+                        hit.collider.tag == "Green" ||
+                        hit.collider.tag == "Purple" ||
+                        hit.collider.tag == "Yellow")
                     {
                         isSameright = true;
 
@@ -567,16 +545,13 @@ public class Bullet : MonoBehaviour
 
                         if (hit2.collider)
                         {
-                            if (hit.collider.tag != "Black" &&
-                                hit.collider.tag != "Rail(right)" &&
-                                 hit.collider.tag != "Rail(down)" &&
-                                hit.collider.tag != "Rail(up)" &&
-                                 hit.collider.tag != "Rail(down)" &&
-                                 hit.collider.tag != "Rail(down)(slow)" &&
-                                 hit.collider.tag != "Untagged" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Black_hole" &&
-                        hit.collider.tag != "Bomb")
+                            if (hit2.collider.tag != "Black" &&
+                                hit2.collider.tag != "Rail(left)" &&
+                                hit2.collider.tag == "Red" ||
+                                hit2.collider.tag == "Blue" ||
+                                hit2.collider.tag == "Green" ||
+                                hit2.collider.tag == "Purple" ||
+                                hit2.collider.tag == "Yellow")
                             {
                                 //取得エフェクト
                                 GameObject get1 = Instantiate(getPrefab, gameObject.transform.position, Quaternion.identity);

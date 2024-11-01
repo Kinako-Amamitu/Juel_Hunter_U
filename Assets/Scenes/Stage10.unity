@@ -1033,13 +1033,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab:
+  - {fileID: 4334701413000337186, guid: 436455a97b0fe3741af9886cf9ef5c6b, type: 3}
   - {fileID: 385981781467495131, guid: df7b94fc0fcfcc04c968054fefa33d9c, type: 3}
   - {fileID: 1748721844653493682, guid: 3cd247095df094d45bb18f6e7010ab13, type: 3}
   - {fileID: 1504964287210747409, guid: 82c61d79041b05944b4c628d32c24048, type: 3}
   - {fileID: 3079424045588693431, guid: 5074c88c844655e47bcf3c3846f10c05, type: 3}
   - {fileID: 1791829864627688191, guid: bdb1840ce6ffff14e9ae8bafa2285e2d, type: 3}
   - {fileID: 73704961693796919, guid: 8c61aa8a906b80543b98ccaaa54ec89f, type: 3}
-  - {fileID: 385981781467495131, guid: df7b94fc0fcfcc04c968054fefa33d9c, type: 3}
   firePoint:
   - {fileID: 1062347677}
   - {fileID: 1851560413}
@@ -1056,7 +1056,7 @@ MonoBehaviour:
   - {fileID: 7366457527993391424, guid: df7b94fc0fcfcc04c968054fefa33d9c, type: 3}
   outZone: {fileID: 0}
   gameTimer: 300
-  juelRequired: 99
+  juelRequired: 100
   playerNum: 2
   deleteCount: 3
   isgameOver: 0
@@ -1077,6 +1077,8 @@ MonoBehaviour:
   select: {fileID: 8300000, guid: 7bd590812d7901a40b3a5a9e6d4bb637, type: 3}
   cancel: {fileID: 8300000, guid: a7e18f12f9e0ec140b9ca4b142a978b7, type: 3}
   explosion: {fileID: 8300000, guid: cf54be80aaa8b7643a5c117876704c15, type: 3}
+  ninja: {fileID: 0}
+  delete: {fileID: 8300000, guid: 4da74d396cc960144872f5dad0927b19, type: 3}
 --- !u!4 &432465263
 Transform:
   m_ObjectHideFlags: 0
@@ -1106,7 +1108,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

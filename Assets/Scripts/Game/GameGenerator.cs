@@ -96,6 +96,7 @@ public class GameGenerator : MonoBehaviour
     public AudioClip cancel; //汎用キャンセル音
     public AudioClip explosion; //爆発音
     public AudioClip ninja; //忍者死亡音
+    public AudioClip delete; //発射しっぱい音
 
     private void Start()
     {
@@ -383,6 +384,12 @@ public class GameGenerator : MonoBehaviour
 
         //リザルト遷移処理
         Result();
+    }
+
+    //発射しっぱい
+    public void FaildShoot()
+    {
+        audioSource.PlayOneShot(delete);
     }
 
     //忍者死亡

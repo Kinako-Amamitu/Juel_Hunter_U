@@ -107,6 +107,7 @@ MonoBehaviour:
   gameGenerator: {fileID: 0}
   explosionPrefab: {fileID: 0}
   getPrefab: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
+  deleat: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
 --- !u!50 &7588121842021507621
 Rigidbody2D:
   serializedVersion: 4

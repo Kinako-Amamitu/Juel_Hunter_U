@@ -56,7 +56,7 @@ MonoBehaviour:
   gameGenerator: {fileID: 0}
   explosionPrefab: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
   getPrefab: {fileID: 0}
-  explo: {fileID: 8300000, guid: cf54be80aaa8b7643a5c117876704c15, type: 3}
+  deleat: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
 --- !u!50 &6037518170912331568
 Rigidbody2D:
   serializedVersion: 4
@@ -132,7 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bomb: {fileID: 3739465851540494416}
-  explosion: {fileID: 8300000, guid: cf54be80aaa8b7643a5c117876704c15, type: 3}
 --- !u!212 &6440379809860131764
 SpriteRenderer:
   m_ObjectHideFlags: 0

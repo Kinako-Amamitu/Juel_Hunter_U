@@ -1101,6 +1101,7 @@ MonoBehaviour:
   cancel: {fileID: 8300000, guid: a7e18f12f9e0ec140b9ca4b142a978b7, type: 3}
   explosion: {fileID: 8300000, guid: cf54be80aaa8b7643a5c117876704c15, type: 3}
   ninja: {fileID: 8300000, guid: ac4b899a5d8f0ce4cb504c231bbdfbdb, type: 3}
+  delete: {fileID: 8300000, guid: 4da74d396cc960144872f5dad0927b19, type: 3}
 --- !u!4 &432465263
 Transform:
   m_ObjectHideFlags: 0
@@ -1130,7 +1131,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3715,7 +3716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2172557404305178095, guid: aabd61229503d0a42acc9b370732be8e, type: 3}
       propertyPath: m_Text
-      value: GIVEUP...
+      value: "\u7121\u5FF5\u2026"
       objectReference: {fileID: 0}
     - target: {fileID: 4434433409287608899, guid: aabd61229503d0a42acc9b370732be8e, type: 3}
       propertyPath: m_Pivot.x
@@ -3807,7 +3808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5324009073291058189, guid: aabd61229503d0a42acc9b370732be8e, type: 3}
       propertyPath: m_Text
-      value: RETRY!!
+      value: "\u9000\u304B\u306C\uFF01\uFF01"
       objectReference: {fileID: 0}
     - target: {fileID: 7331122457529465645, guid: aabd61229503d0a42acc9b370732be8e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

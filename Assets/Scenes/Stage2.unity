@@ -1354,6 +1354,8 @@ MonoBehaviour:
   select: {fileID: 8300000, guid: 7bd590812d7901a40b3a5a9e6d4bb637, type: 3}
   cancel: {fileID: 8300000, guid: a7e18f12f9e0ec140b9ca4b142a978b7, type: 3}
   explosion: {fileID: 8300000, guid: cf54be80aaa8b7643a5c117876704c15, type: 3}
+  ninja: {fileID: 0}
+  delete: {fileID: 8300000, guid: 4da74d396cc960144872f5dad0927b19, type: 3}
 --- !u!4 &432465263
 Transform:
   m_ObjectHideFlags: 0
