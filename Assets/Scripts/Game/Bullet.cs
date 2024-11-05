@@ -28,6 +28,7 @@ public class Bullet : MonoBehaviour
 
     int juelTime = 0;//ジュエルの待機時間
 
+    
     bool juelMode = true; //ジュエルの状態
 
     private void Start()
@@ -41,6 +42,10 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
+        if(gameGenerator.isgameClear==true)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
+        }
         if(juelMode==false)
         {
             juelTime++;

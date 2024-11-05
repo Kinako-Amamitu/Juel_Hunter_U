@@ -18,6 +18,7 @@ public class Ranking : MonoBehaviour
     [SerializeField] Text stage; //ステージ
     [SerializeField] Text[] ranking; //ランキング(スコア)
     [SerializeField] Text[] rankingCurrent; //ランキングの順位
+    [SerializeField] GameObject[] rankingSendButton; //ランキングの遷移ボタン
 
     /// <summary>
     /// 音関連
@@ -26,6 +27,8 @@ public class Ranking : MonoBehaviour
 
     public AudioClip select; //汎用決定音
     public AudioClip cancel; //汎用キャンセル音
+
+    bool rankingRug=false; //遷移後の遅延
 
 
     /// <summary>
@@ -99,7 +102,18 @@ public class Ranking : MonoBehaviour
         }
         else
         {
-            stage.text = string.Format("STAGE: {0}", currentStage);
+            if(currentStage==11)
+            {
+                stage.text = string.Format("3minMode");
+            }
+            else if(currentStage == 12)
+            {
+                stage.text = string.Format("5minMode");
+            }
+            else
+            {
+                stage.text = string.Format("STAGE: {0}", currentStage);
+            }
         }
         
         //ランキングを読み込む
@@ -119,7 +133,19 @@ public class Ranking : MonoBehaviour
         {
             currentStage--;
         }
-        stage.text = string.Format("STAGE: {0}", currentStage);
+
+        if (currentStage == 11)
+        {
+            stage.text = string.Format("3minMode");
+        }
+        else if (currentStage == 12)
+        {
+            stage.text = string.Format("5minMode");
+        }
+        else
+        {
+            stage.text = string.Format("STAGE: {0}", currentStage);
+        }
 
         for (int i = 0; i < ranking.Length; i++)
         {//前のランキングは消しておく
@@ -127,9 +153,38 @@ public class Ranking : MonoBehaviour
             ranking[i].text ="";
         }
 
+        rankingRug = true;
+
         //ランキングを読み込む
         LordRanking();
 
+    }
+
+    private void Update()
+    {
+        if(rankingRug==true)
+        {
+            ButtonDown();
+            rankingRug = false;
+            Invoke(nameof(ButtonUp), 1.0f);
+        }
+    }
+
+    private void ButtonDown()
+    {
+        for(int i=0;i<rankingSendButton.Length;i++)
+        {
+            rankingSendButton[i].SetActive(false);
+        }
+        
+    }
+
+    private void ButtonUp()
+    {
+        for (int i = 0; i < rankingSendButton.Length; i++)
+        {
+            rankingSendButton[i].SetActive(true);
+        }
     }
 
     /// <summary>
@@ -145,12 +200,27 @@ public class Ranking : MonoBehaviour
         {
             currentStage++;
         }
-        stage.text = string.Format("STAGE: {0}", currentStage);
+
+        if (currentStage == 11)
+        {
+            stage.text = string.Format("3minMode");
+        }
+        else if (currentStage == 12)
+        {
+            stage.text = string.Format("5minMode");
+        }
+        else
+        {
+            stage.text = string.Format("STAGE: {0}", currentStage);
+        }
+
         for (int i = 0; i < ranking.Length; i++)
         {//前のランキングは消しておく
             rankingCurrent[i].text = null;
             ranking[i].text = "";
         }
+
+        rankingRug = true;
 
         //ランキングを読み込む
         LordRanking();

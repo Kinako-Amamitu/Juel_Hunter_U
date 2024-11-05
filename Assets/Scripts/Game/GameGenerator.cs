@@ -144,17 +144,13 @@ public class GameGenerator : MonoBehaviour
         {//プレイヤー数の分ループ
             StartCoroutine(UpdateBullet(i)); //ジュエルをランダムに生成する
         }
-
+        Invoke(nameof(GameClear), 22.3f);
     }
 
     private void Update()
     {
-        if (isgameOver == true)
+        if (isgameOver == true|| isgameClear == true)
         {//ゲームオーバーになったら
-            return; //Updateに入らない
-        }
-        else if (isgameClear == true)
-        {
             return; //Updateに入らない
         }
 

@@ -35,6 +35,13 @@ public class Title : MonoBehaviour
     {
         audioSource.PlayOneShot(start);
         bool isSuccess = NetworkManager.Instance.LoadUserData();
+        if (NetworkManager.Instance.authToken==null)
+        {
+            StartCoroutine(NetworkManager.Instance.CreateToken(responce =>
+            {
+                bool isSuccess = NetworkManager.Instance.LoadUserData();
+            }));
+        }
         if (!isSuccess)
         {
             //ユーザーデータが保存されていない場合は登録

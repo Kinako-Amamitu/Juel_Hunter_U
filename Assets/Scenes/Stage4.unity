@@ -2073,7 +2073,7 @@ GameObject:
   - component: {fileID: 897959052}
   m_Layer: 0
   m_Name: Over (1)
-  m_TagString: Rail(left)
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

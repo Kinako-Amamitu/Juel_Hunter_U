@@ -1032,6 +1032,9 @@ MonoBehaviour:
   - {fileID: 1634811448}
   - {fileID: 810485684}
   - {fileID: 381908}
+  rankingSendButton:
+  - {fileID: 435395487}
+  - {fileID: 229030958}
   select: {fileID: 8300000, guid: 92be06e2e1bd97342bf3ee211c7aeb29, type: 3}
   cancel: {fileID: 8300000, guid: a7e18f12f9e0ec140b9ca4b142a978b7, type: 3}
 --- !u!82 &595697298

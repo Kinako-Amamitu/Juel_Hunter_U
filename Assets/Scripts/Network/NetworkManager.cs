@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 public class NetworkManager : MonoBehaviour
 {
 #if DEBUG
-    const string API_BASE_URL = "http://localhost:8000/api/";
+    const string API_BASE_URL = "https://api-juelhunter.japaneast.cloudapp.azure.com/api/";
 #else
     const string API_BASE_URL = "https://api-juelhunter.japaneast.cloudapp.azure.com/api/";//APIのデプロイURL
 #endif
@@ -22,7 +22,7 @@ public class NetworkManager : MonoBehaviour
     private int stageID; //ステージID
     private int score; //スコア
 
-    private string authToken; //APIトークン
+    public string authToken; //APIトークン
 
     private int stageClearNumber=0; //ステージクリア状況
 
