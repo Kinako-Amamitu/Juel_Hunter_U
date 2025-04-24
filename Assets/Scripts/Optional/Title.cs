@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////
+///
+/// タイトル画面を管理するスクリプト
+/// 
+/// Aughter:木田晃輔
+///
+////////////////////////////////////////////////////////////////
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,7 +13,7 @@ using UnityEngine;
 
 public class Title : MonoBehaviour
 {
-
+    //se
     public AudioClip start; //ゲームスタート音
     public AudioClip ranking; //ランキングスタート音
     AudioSource audioSource; //SE入力にオーディオソースを使用する

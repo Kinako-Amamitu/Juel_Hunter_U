@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////
+///
+/// 敵を管理するスクリプト
+/// 
+/// Aughter:木田晃輔
+///
+////////////////////////////////////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +13,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    [SerializeField] Vector2 velocity;
+    //Unityからアタッチ
+    [SerializeField] Vector2 velocity; //質
     [SerializeField] private GameObject explosionPrefab; //爆発エフェクト
 
+    //ゲームマネージャーを使う
     GameGenerator gameGenerator;
 
 
@@ -18,6 +28,11 @@ public class Enemy : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = velocity;
         gameGenerator = GameObject.Find("GameGenerator").GetComponent<GameGenerator>();
     }
+
+    /// <summary>
+    /// トリガー接触判定
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Black_hole")

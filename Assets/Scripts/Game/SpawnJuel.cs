@@ -1,11 +1,20 @@
+////////////////////////////////////////////////////////////////
+///
+/// ジュエルの生成を管理するスクリプト
+/// 
+/// Aughter:木田晃輔
+///
+////////////////////////////////////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnJuel : MonoBehaviour
 {
-    [SerializeField] List<GameObject> juelPrefabs;
-    [SerializeField] int juelLayer;
+    //unityからアタッチ
+    [SerializeField] List<GameObject> juelPrefabs; //ジュエルプレハブ
+    [SerializeField] int juelLayer; //ジュエルの種類
 
     int rnd1=-1;
     int rnd2=-1;

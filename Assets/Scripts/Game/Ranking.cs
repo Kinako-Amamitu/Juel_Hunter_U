@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////
+///
+/// ランキング画面を管理するスクリプト
+/// 
+/// Aughter:木田晃輔
+///
+////////////////////////////////////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -96,18 +104,18 @@ public class Ranking : MonoBehaviour
         //ランキング表示してるステージを表示
         currentStage = GameGenerator.Stageset();
         if (currentStage == 0)
-        {
+        {//ステージ１で左を押した場合
             currentStage = 1;
             stage.text = string.Format("STAGE: {0}", currentStage);
         }
         else
         {
             if(currentStage==11)
-            {
+            {//ステージ10で右を押した場合
                 stage.text = string.Format("3minMode");
             }
             else if(currentStage == 12)
-            {
+            {//5minModeで右を押した場合
                 stage.text = string.Format("5minMode");
             }
             else
@@ -135,7 +143,7 @@ public class Ranking : MonoBehaviour
         }
 
         if (currentStage == 11)
-        {
+        {//5minModeで左を押した場合
             stage.text = string.Format("3minMode");
         }
         else if (currentStage == 12)
@@ -163,13 +171,16 @@ public class Ranking : MonoBehaviour
     private void Update()
     {
         if(rankingRug==true)
-        {
+        {//少し遅らせてランキング表示
             ButtonDown();
             rankingRug = false;
             Invoke(nameof(ButtonUp), 1.0f);
         }
     }
 
+    /// <summary>
+    /// ボタン非表示
+    /// </summary>
     private void ButtonDown()
     {
         for(int i=0;i<rankingSendButton.Length;i++)
@@ -179,6 +190,9 @@ public class Ranking : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// ボタン表示
+    /// </summary>
     private void ButtonUp()
     {
         for (int i = 0; i < rankingSendButton.Length; i++)
@@ -202,11 +216,11 @@ public class Ranking : MonoBehaviour
         }
 
         if (currentStage == 11)
-        {
+        {//11ステージが選ばれた
             stage.text = string.Format("3minMode");
         }
         else if (currentStage == 12)
-        {
+        {//12ステージが選ばれた
             stage.text = string.Format("5minMode");
         }
         else
